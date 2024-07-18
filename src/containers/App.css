@@ -1,0 +1,11 @@
+h1{
+  padding-left: 50px;
+}
+h2{
+  padding-left: 50px;
+}
+
+.right{
+  display: flex;
+  justify-content: right;
+}
