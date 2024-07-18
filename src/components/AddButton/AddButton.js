@@ -7,7 +7,9 @@ const AddButton = ({onRouteChange}) => {
     return (
         <div className='tc dib'>
             <div className="bg-washed-yellow br3 grow pa3 ma2 bw2 shadow-5">
-                <img onClick={() => onRouteChange('creatlist')} alt='categories' src={`/img/add.png`}  width='250' height='250'/>
+                <img
+                    onClick={() => onRouteChange('')}
+                    alt='categories' src={`/img/add.png`}  width='250' height='250'/>
             </div>
 
             <div>
