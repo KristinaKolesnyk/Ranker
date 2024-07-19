@@ -1,0 +1,17 @@
+.wrapping{
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.criteria {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px; /* Расстояние между критериями, можно настроить по своему усмотрению */
+}
+
+.criterion {
+    margin-right: 10px; /* Расстояние между критериями, можно настроить по своему усмотрению */
+}
