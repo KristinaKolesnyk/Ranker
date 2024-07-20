@@ -1,5 +1,5 @@
 import React from 'react';
-import {useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import '../CreatList/CreatList.css';
 import Scroll from "../../components/Scroll";
@@ -12,6 +12,7 @@ import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
 const YourListPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const {category, inputs} = location.state || {category: '', inputs: []};
 
     return (
@@ -21,23 +22,32 @@ const YourListPage = () => {
                 <HomeButton/>
             </div>
             <h2>{category}</h2>
-            <div className='wrapping pa3 ma3 flex justify-between items-center'>
-                <h3> NAME </h3>
-                {inputs.map((input, index) => (
-                    <h3 key={index} id='criterion'>{input}</h3>
-                ))}
-                <h3> URL </h3>
-                <h3> RATING </h3>
+
+            <div className='grid-container'>
+                <div className='grid-header'>
+                    <div><h3> NAME </h3></div>
+                    {inputs.map((input, i) => (
+                        <div key={i}>
+                            <h3>{input.toUpperCase()}</h3>
+                        </div>
+                    ))}
+
+                    <div><h3> URL </h3></div>
+                    <div><h3> RATING </h3></div>
+                </div>
+
             </div>
+            <div className='grid-container'>
+                <Scroll>
+                    <ItemList items={items} inputs={inputs}/>
+                    <AddItem/>
+                    <ChooseWinButton/>
 
-            <Scroll>
-                <ItemList items={items}/>
-                <AddItem/>
-                <ChooseWinButton/>
-
-            </Scroll>
+                </Scroll>
+            </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default YourListPage;

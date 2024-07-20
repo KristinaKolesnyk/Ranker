@@ -1,19 +1,21 @@
 import React from 'react';
 import Item from "./Item";
+import './ItemList.css';
 
-const ItemList = ({items}) => {
+const ItemList = ({items, inputs}) => {
     return (
         <div>
             {
-                items.map((item, i) => {
+                items.map((item) => {
                     return (
                         <Item
-                            key={i}
-                            id={items[i].id}
-                            name={items[i].name}
-                            criterions={items[i].criterions}
-                            url={items[i].URL}
-                            rating={items[i].rating}
+                            key={item.id}
+                            id={item.id}
+                            name={item.name}
+                            criterions={item.criterions}
+                            url={item.URL}
+                            rating={item.rating}
+                            inputs={inputs}
 
                         />
                     );
