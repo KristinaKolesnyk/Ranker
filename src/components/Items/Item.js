@@ -9,7 +9,7 @@ const Item = ({name, id, criterions, url, rating}) => {
                 ? criterions.map((criterion, i) =>
                     <div key={i}>{criterion}
                     </div>)
-                : <h2 className='criterion'>{criterions}</h2>  // If criteria not an array, just display it as is.
+                : <h2 >{criterions}</h2>  // If criteria not an array, just display it as is.
             }
 
             <div ><a href={url} target='_blank' rel='noopener noreferrer'>Visit Site</a></div>

@@ -24,7 +24,7 @@ const YourListPage = () => {
             <h2>{category}</h2>
 
             <div className='grid-container'>
-                <div className='grid-header'>
+                <div className='grid-header grid-item'>
                     <div><h3> NAME </h3></div>
                     {inputs.map((input, i) => (
                         <div key={i}>
@@ -34,17 +34,21 @@ const YourListPage = () => {
 
                     <div><h3> URL </h3></div>
                     <div><h3> RATING </h3></div>
+                    <div><h3> ACTIONS </h3></div>
                 </div>
 
             </div>
-            <div className='grid-container'>
-                <Scroll>
-                    <ItemList items={items} inputs={inputs}/>
-                    <AddItem/>
-                    <ChooseWinButton/>
 
-                </Scroll>
-            </div>
+            <Scroll>
+                <div className='grid-container'>
+
+                        <ItemList items={items} inputs={inputs}/>
+                        <AddItem/>
+                        <ChooseWinButton/>
+
+                </div>
+            </Scroll>
+
         </div>
     )
         ;
