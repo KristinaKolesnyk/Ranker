@@ -5,6 +5,8 @@ import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
 import WelcomePage from "../pages/Welcome/WelcomePage";
 import YourListPage from "../pages/YourList/YourListPage";
+import AddToListPage from "../pages/AddToListPage/AddToListPage";
+import BracketPage from "../pages/BracketPage";
 
 
 const App = () => {
@@ -28,7 +30,9 @@ const App = () => {
                 <Route path='/creatlist' element={<CreatListPage onRouteChange={onRouteChange}/>}/>
                 <Route path='/signin' element={<SignIn onRouteChange={onRouteChange}/>}/>
                 <Route path='/signup' element={<SignUp onRouteChange={onRouteChange}/>}/>
-                <Route path='/yourlist' element={<YourListPage onRouteChange={onRouteChange}/>}/>
+                <Route path='/yourlist' element={<YourListPage />}/>
+                <Route path='/addtolist' element={<AddToListPage />}/>
+                <Route path='/bracketpage' element={<BracketPage />}/>
             </Routes>
         </div>
     );

@@ -7,6 +7,7 @@ import AddItem from "../../components/AddButton/AddItem";
 import "./YourList.css";
 import ItemList from "../../components/Items/ItemList";
 import {items} from "../../items";
+import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
 
 const YourListPage = () => {
@@ -32,6 +33,7 @@ const YourListPage = () => {
             <Scroll>
                 <ItemList items={items}/>
                 <AddItem/>
+                <ChooseWinButton/>
 
             </Scroll>
         </div>

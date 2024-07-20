@@ -1,7 +1,7 @@
 import React from 'react';
 import './WelcomePage.css';
 import Navigation from '../../components/Navigation/Navigation';
-import SearchBox from '../../components/Navigation/SearchBox';
+import SearchBox from '../../components/SearchBox';
 import Scroll from '../../components/Scroll';
 import CardList from '../../components/Cards/CardList';
 import AddButton from '../../components/AddButton/AddButton';
