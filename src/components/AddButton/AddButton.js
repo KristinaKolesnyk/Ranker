@@ -13,7 +13,7 @@ const AddButton = () => {
             <div className="bg-washed-yellow br3 grow pa3 ma2 bw2 shadow-5">
                 <img
                     onClick={handleClick}
-                    alt='categories' src={`/img/add.png`}  width='200' height='200'/>
+                    alt='categories' src={`/img/add.png`}  width='250' height='250'/>
             </div>
 
             <div>

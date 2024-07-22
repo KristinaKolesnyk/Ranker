@@ -24,3 +24,40 @@ input[type="text"] {
     box-sizing: border-box; /* Включаем padding и border в общую ширину и высоту элемента */
     margin: 10px;
 }
+.button {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.home-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box{
+    padding: 30px;
+    margin: 30px;
+    border: 1px solid #ccc;
+    background-color: rgba(254, 245, 231, 0.4) ;
+
+}

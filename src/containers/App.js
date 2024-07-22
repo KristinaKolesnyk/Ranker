@@ -6,7 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import WelcomePage from "../pages/Welcome/WelcomePage";
 import YourListPage from "../pages/YourList/YourListPage";
 import AddToListPage from "../pages/AddToListPage/AddToListPage";
-import BracketPage from "../pages/BracketPage";
+import BracketPage from "../pages/BracketPage/BracketPage";
 
 
 const App = () => {

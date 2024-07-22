@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate, useLocation} from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import '../CreatList/CreatList.css';
 import Scroll from "../../components/Scroll";
@@ -12,43 +12,45 @@ import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
 const YourListPage = () => {
     const location = useLocation();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const {category, inputs} = location.state || {category: '', inputs: []};
 
     return (
         <div className='tc'>
-            <div className='flex justify-between items-center'>
-                <h1 className='center f1 washed-yellow bold'>Your List</h1>
-                <HomeButton/>
+            <div className='header'>
+                <div className='home-button'>
+                    <HomeButton/>
+                </div>
+                <h1 className='title f1 washed-yellow bold'>Your List</h1>
             </div>
-            <h2>{category}</h2>
+            <h1 className='pa3-ns'>{category}</h1>
+
 
             <div className='grid-container'>
                 <div className='grid-header grid-item'>
-                    <div><h3> NAME </h3></div>
-                    {inputs.map((input, i) => (
+                    <div><h2> NAME </h2></div>
+                    {inputs.filter(input => input.trim() !== '').map((input, i) => (
                         <div key={i}>
-                            <h3>{input.toUpperCase()}</h3>
+                             <h2>{input.toUpperCase()}</h2>
                         </div>
                     ))}
 
-                    <div><h3> URL </h3></div>
-                    <div><h3> RATING </h3></div>
-                    <div><h3> ACTIONS </h3></div>
-                </div>
+                    <div><h2> URL </h2></div>
+                    <div><h2> RATING </h2></div>
+                    <div><h2> ACTIONS </h2></div>
 
+                </div>
             </div>
 
             <Scroll>
                 <div className='grid-container'>
-
-                        <ItemList items={items} inputs={inputs}/>
-                        <AddItem/>
-                        <ChooseWinButton/>
-
+                    <ItemList items={items} inputs={inputs}/>
                 </div>
-            </Scroll>
 
+
+            <AddItem/>
+            <ChooseWinButton/>
+            </Scroll>
         </div>
     )
         ;

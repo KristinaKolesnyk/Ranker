@@ -1,0 +1,31 @@
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.home-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-place {
+    display: flex;
+    justify-content: center;
+    gap: 10em;
+    margin-top: 10em;
+    align-content: center;
+}

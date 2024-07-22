@@ -4,6 +4,7 @@ import HomeButton from "../../components/Navigation/HomeButton";
 import Scroll from "../../components/Scroll";
 import './AddToListPage.css';
 import SaveButton from "../../components/Navigation/SaveButton";
+import CancelButton from "../../components/Navigation/CancelButton";
 
 
 const AddToListPage = () => {
@@ -33,16 +34,18 @@ const AddToListPage = () => {
 
     return (
         <div className='tc'>
-            <div className='flex justify-between items-center'>
-                <h1 className='center f1 washed-yellow bold'>Add Item</h1>
-                <HomeButton/>
+            <div className='header'>
+                <div className='home-button'>
+                    <HomeButton/>
+                </div>
+                <h1 className='title f1 washed-yellow bold'>Add Item</h1>
+
             </div>
 
             <Scroll>
-                <div className='center'>
-                    <div className='tc dib input-container'>
+                <div className='tc box dib input-container br3 bw2 shadow-5'>
 
-                        <input
+                    <input
                             className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                             type="text" name="itemName" id="itemName" placeholder='Enter name'
                             value={itemName} onChange={handleName}/>
@@ -54,10 +57,10 @@ const AddToListPage = () => {
                             className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                             type="text" name="url" id="url" placeholder='Enter URL (optional)'
                             value={url} onChange={handleURL}/>
-
-                        <SaveButton onClick={handleSubmit}/>
-                    </div>
-
+                        <div className='button input-container'>
+                            <SaveButton onClick={handleSubmit}/>
+                            <CancelButton/>
+                        </div>
                 </div>
 
             </Scroll>

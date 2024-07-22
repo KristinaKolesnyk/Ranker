@@ -1,5 +1,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import "./ButtonSize.css"
+
 
 const HomeButton = () => {
     let navigate = useNavigate();
@@ -7,9 +9,9 @@ const HomeButton = () => {
         navigate('/');
     }
     return (
-        <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
+        <nav >
             <button onClick={handleClickHome}
-                    className=' tr br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Home Page
+                    className='br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Home Page
             </button>
         </nav>);
 }

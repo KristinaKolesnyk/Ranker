@@ -32,12 +32,13 @@ class WelcomePage extends React.Component {
 
         return (
             <div className='WelcomePage'>
-                <Navigation isSignedIn={isSignedIn}/>
+                <div className='flex justify-between items-center'>
+                    <h1 className='rankertext f1 washed-yellow '>The Ranker</h1>
+                    <Navigation isSignedIn={isSignedIn}/>
+                </div>
+                <h2 className='rankertext f3 washed-yellow'>Where Decisions Become Easy</h2>
+
                 <div className='tc'>
-                    <div className='tl'>
-                        <h1 className=' rankertext f1 washed-yellow '>The Ranker</h1>
-                        <h2 className='rankertext washed-yellow'>Where Decisions Become Easy</h2>
-                    </div>
                     <div>
                         <h1 className='f1'>LIST</h1>
                         <SearchBox searchChange={this.onSearchChange}/>
@@ -55,3 +56,4 @@ class WelcomePage extends React.Component {
 }
 
 export default WelcomePage;
+

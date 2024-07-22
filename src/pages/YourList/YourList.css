@@ -6,7 +6,7 @@
 .grid-header,
 .grid-item {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) ; /* Добавляем дополнительный столбец для кнопок */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) ; /* Дополнительный столбец для кнопок */
     gap: 20px;
     text-align: center;
     margin-bottom: 10px;
@@ -22,4 +22,35 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.home-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.title {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box-color{
+
+    border: 1px solid #ccc;
+    background-color: rgba(254, 245, 231, 0.4) ;
+
 }
