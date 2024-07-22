@@ -61,7 +61,7 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
                             key={i}
                             className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                             type="text" name={`rating${i}`} id={`rating${i}`}
-                            placeholder={`Enter a rating for ${criterion}`}
+                            placeholder={`Enter a rating for ${criterion.toLowerCase()}`}
                             value={ratings[i]}
                             onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
                         />

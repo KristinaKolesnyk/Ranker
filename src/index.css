@@ -9,3 +9,15 @@ body {
   background: linear-gradient(to right, #7AA1D2, #DBD4B4, #CC95C0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
+
+@font-face {
+  font-family: 'Lora Cute Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Lora Cute Regular'), url('Lora Cute.woff') format('woff');
+}
+h1{
+  font-family: 'Lora Cute Regular';
+  font-weight: normal;
+
+}

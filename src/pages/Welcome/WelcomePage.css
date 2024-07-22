@@ -13,7 +13,6 @@ body{
 
 .rankertext {
   padding-left: 60px;
-
 }
 
 .tc {
@@ -22,4 +21,28 @@ body{
 
 .tl {
   text-align: left;
+}
+.header-text {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+
+.sub-text {
+    padding: 35px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100px;
+}
+
+.category-text {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

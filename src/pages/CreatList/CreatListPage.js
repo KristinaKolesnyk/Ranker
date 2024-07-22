@@ -39,7 +39,7 @@ const CreatListPage = ({setCategoryData}) => {
                 </div>
                 <h1 className='title f1 washed-yellow bold'>Creat List</h1>
             </div>
-            <h2>COMPARE ALL</h2>
+            <h1>COMPARE ALL</h1>
 
             <Scroll>
                 <div className='ma4' >

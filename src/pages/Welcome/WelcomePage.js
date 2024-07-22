@@ -32,15 +32,21 @@ class WelcomePage extends React.Component {
 
         return (
             <div className='WelcomePage'>
-                <div className='flex justify-between items-center'>
-                    <h1 className='rankertext f1 washed-yellow '>The Ranker</h1>
+                <div className='header-text'>
+                    <h1 className='rankertext f-headline washed-yellow '>The Ranker</h1>
                     <Navigation isSignedIn={isSignedIn}/>
+
                 </div>
-                <h2 className='rankertext f3 washed-yellow'>Where Decisions Become Easy</h2>
+                <div className='sub-text'>
+                    <div className='category-text'>
+                        <h2 className='rankertext f1 washed-yellow'>Where Decisions Become Easy</h2>
+                    </div>
+                    <h1>Categories</h1>
+
+                </div>
 
                 <div className='tc'>
                     <div>
-                        <h1 className='f1'>LIST</h1>
                         <SearchBox searchChange={this.onSearchChange}/>
                     </div>
                     <Scroll>
