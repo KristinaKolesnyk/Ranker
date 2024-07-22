@@ -1,13 +1,14 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {criteriaByCategory} from "../../data";
+import {criteriaByCategory, itemsByCategory} from "../../data";
 
 
 const Card = ({name, id}) => {
     let navigate = useNavigate();
     const handleClick = () => {
         const criteria = criteriaByCategory[name] || [];
-        navigate(`/yourlist`, {state: {category: name, criteria}});
+        const items = itemsByCategory[name] || [];
+        navigate(`/yourlist`, {state: {category: name, criteria, items}});
     }
     return (
         <div className='tc dib' onClick={handleClick}>

@@ -1,11 +1,14 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 
 
-const AddItem = () => {
+const AddItem = ({criteria}) => {
     let navigate = useNavigate();
+    const location = useLocation();
+   // const {category, criteria =[]} = location.state || {category: '', criteria: []};
+
     const handleClick = () => {
-        navigate('/addtolist');
+        navigate('/addtolist', {state: {criteria}});
     }
 
     return (

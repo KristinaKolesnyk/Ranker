@@ -6,15 +6,15 @@ import Scroll from "../../components/Scroll";
 import AddItem from "../../components/AddButton/AddItem";
 import "./YourList.css";
 import ItemList from "../../components/Items/ItemList";
-//import {items} from "../../items";
 import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
-import {itemsByCategory} from "../../data";
+//import {itemsByCategory} from "../../data";
 
 
-const YourListPage = () => {
+const YourListPage = ({categoryData}) => {
     const location = useLocation();
-    const {category,criteria=[], inputs=[]} = location.state || {category: '', criteria:[], inputs: []};
-    const items = itemsByCategory[category] || [];
+    const state = location.state || categoryData || {};
+    const {category,criteria=[], inputs=[], items=[]} = state;
+    //const items = itemsByCategory[category] || [];
     const allCriteria = [...criteria, ...inputs.filter(input => input.trim()!== '')];
 
     return (
@@ -50,7 +50,7 @@ const YourListPage = () => {
                 </div>
 
 
-            <AddItem/>
+            <AddItem criteria={allCriteria} />
             <ChooseWinButton/>
             </Scroll>
         </div>

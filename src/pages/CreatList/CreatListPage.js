@@ -8,10 +8,10 @@ import Scroll from "../../components/Scroll";
 import ComparInput from "../../components/ComparInput";
 
 
-const CreatListPage = () => {
+const CreatListPage = ({setCategoryData}) => {
     const [category, setCategory] = useState('');
-    const navigate = useNavigate();
     const [inputs, setInputs] = useState(['']);
+    const navigate = useNavigate();
 
     const handleInputChange = (index, event) => {
         const newInputs = [...inputs];
@@ -19,7 +19,6 @@ const CreatListPage = () => {
         if (index === inputs.length - 1 && event.target.value !== '') {
             newInputs.push('')
         }
-
         setInputs(newInputs);
     }
     const handleCategoryChange = (event) => {
@@ -27,7 +26,9 @@ const CreatListPage = () => {
     }
 
     const handleSubmit = () => {
-        navigate('/yourlist', {state: {category, inputs}});
+        const criteria = inputs.filter(input => input.trim() !== '');
+        setCategoryData({category, criteria, items: []}); // Update the parent component's state.
+        navigate('/yourlist');
     }
 
     return (

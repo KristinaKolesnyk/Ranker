@@ -10,7 +10,8 @@ import BracketPage from "../pages/BracketPage/BracketPage";
 
 
 const App = () => {
-    const [isSignedIn, setIsSignedIn] = useState(false); // Update
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [categoryData, setCategoryData] = useState({});
     const navigate = useNavigate(); // Update
 
     const onRouteChange = (route) => {
@@ -21,17 +22,25 @@ const App = () => {
         }
         navigate(route);
     }
+
+    /*const handleSetCategoryData = (newData) => {
+        setCategoryData(prevData => ({
+            ...prevData,
+            ...newData
+        }));
+    }*/
+
     return (
 
         <div>
             <Routes>
                 <Route exact path='/'
                        index element={<WelcomePage onRouteChange={onRouteChange} isSignedIn={isSignedIn}/>}/>
-                <Route path='/creatlist' element={<CreatListPage onRouteChange={onRouteChange}/>}/>
+                <Route path='/creatlist' element={<CreatListPage onRouteChange={onRouteChange} setCategoryData={setCategoryData}/>}/>
                 <Route path='/signin' element={<SignIn onRouteChange={onRouteChange}/>}/>
                 <Route path='/signup' element={<SignUp onRouteChange={onRouteChange}/>}/>
-                <Route path='/yourlist' element={<YourListPage />}/>
-                <Route path='/addtolist' element={<AddToListPage />}/>
+                <Route path='/yourlist' element={<YourListPage categoryData={categoryData}/>}/>
+                <Route path='/addtolist' element={<AddToListPage categoryData={categoryData} setCategoryData={setCategoryData}/>}/>
                 <Route path='/bracketpage' element={<BracketPage />}/>
             </Routes>
         </div>
