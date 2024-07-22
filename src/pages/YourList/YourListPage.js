@@ -6,14 +6,16 @@ import Scroll from "../../components/Scroll";
 import AddItem from "../../components/AddButton/AddItem";
 import "./YourList.css";
 import ItemList from "../../components/Items/ItemList";
-import {items} from "../../items";
+//import {items} from "../../items";
 import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
+import {itemsByCategory} from "../../data";
 
 
 const YourListPage = () => {
     const location = useLocation();
-    //const navigate = useNavigate();
-    const {category, inputs} = location.state || {category: '', inputs: []};
+    const {category,criteria=[], inputs=[]} = location.state || {category: '', criteria:[], inputs: []};
+    const items = itemsByCategory[category] || [];
+    const allCriteria = [...criteria, ...inputs.filter(input => input.trim()!== '')];
 
     return (
         <div className='tc'>
@@ -29,9 +31,9 @@ const YourListPage = () => {
             <div className='grid-container'>
                 <div className='grid-header grid-item'>
                     <div><h2> NAME </h2></div>
-                    {inputs.filter(input => input.trim() !== '').map((input, i) => (
+                    {allCriteria.map((criterion, i) => (
                         <div key={i}>
-                             <h2>{input.toUpperCase()}</h2>
+                             <h2>{criterion.toUpperCase()}</h2>
                         </div>
                     ))}
 
@@ -52,8 +54,7 @@ const YourListPage = () => {
             <ChooseWinButton/>
             </Scroll>
         </div>
-    )
-        ;
+    );
 }
 
 export default YourListPage;
