@@ -37,12 +37,17 @@ class WelcomePage extends React.Component {
                     <Navigation isSignedIn={isSignedIn}/>
 
                 </div>
-                <div className='sub-text'>
-                    <div className='category-text'>
-                        <h2 className='rankertext f1 washed-yellow'>Where Decisions Become Easy</h2>
-                    </div>
-                    <h1>Categories</h1>
 
+                <div className='header-text'>
+                    <h2 className='rankertext f1 washed-yellow'>Where Decisions Become Easy</h2>
+                    {this.props.user.name ?
+                        <h2 className='welcome-text f1 welcometext washed-yellow'>Welcome, {this.props.user.name}</h2>
+                        : <h2 className='welcome-text f1 welcometext washed-yellow'>Welcome, Guest</h2>
+                    }
+                </div>
+
+                <div className='tc'>
+                    <h1>Categories</h1>
                 </div>
 
                 <div className='tc'>

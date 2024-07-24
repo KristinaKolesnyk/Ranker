@@ -84,5 +84,4 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
     );
 }
 
-//name={`criterion${i+1}`} id={`criterion${i+1}`} placeholder={`Enter criterion ${i+1}`}
 export default AddToListPage;

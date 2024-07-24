@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ParticlesBg from 'particles-bg';
 import {useNavigate} from "react-router-dom";
 import "../SignIn/SignIn.css"
@@ -13,11 +13,45 @@ let config = {
     }
 };
 
-const SignUp = ({onRouteChange}) => {
+const SignUp = ({loadUser}) => {
+    const [signUpEmail, setSignUpEmail] = useState('');
+    const [signUpPassword, setSignUnPassword] = useState('');
+    const [signUpName, setSignUpName] = useState('');
     let navigate = useNavigate();
-    const handleClickHome = () => {
-        navigate('/');
+
+    const onNameChange = (event) => {
+        setSignUpName(event.target.value);
     }
+
+    const onEmailChange = (event) => {
+        setSignUpEmail(event.target.value);
+    }
+    const onPasswordChange = (event) => {
+        setSignUnPassword(event.target.value);
+    }
+
+    const onSubmitSignUp = () => {
+        fetch('http://localhost:3000/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: signUpName,email: signUpEmail, password: signUpPassword})
+        }).then(response => response.json())
+            .then(user => {
+                if (user) {
+                    loadUser(user);
+                    navigate('/');
+                } else {
+                    alert('Incorrect credentials');
+                }
+            })
+
+    }
+    /*const handleClickHome = () => {
+        navigate('/');
+    }*/
+
     return (
         <div>
             <ParticlesBg className="config" type="cobweb" config={config} bg={true}/>
@@ -29,25 +63,25 @@ const SignUp = ({onRouteChange}) => {
 
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor='name'>Name</label>
-                                <input
+                                <input onChange={onNameChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100"
-                                    type='email' name="name" id="name"/>
+                                    type='text' name="name" id="name"/>
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                                <input
+                                <input onChange={onEmailChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100"
                                     type="email" name="email-address" id="email-address"/>
                             </div>
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                                <input
+                                <input onChange={onPasswordChange}
                                     className="b pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100"
                                     type="password" name="password" id="password"/>
                             </div>
                         </fieldset>
                         <div className="">
-                            <input onClick={handleClickHome}
+                            <input onClick={onSubmitSignUp}
                                    className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                                    type="submit" value="Save"/>
                         </div>

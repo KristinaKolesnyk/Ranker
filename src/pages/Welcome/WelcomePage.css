@@ -12,7 +12,10 @@ body{
 
 
 .rankertext {
-  padding-left: 60px;
+  padding-left: 0px;
+}
+.welcometext {
+  padding-right: 15px;
 }
 
 .tc {
