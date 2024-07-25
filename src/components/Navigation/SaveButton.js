@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 import "./ButtonSize.css"
 
 
@@ -12,7 +12,7 @@ const SaveButton = ({onClick}) => {
     return (
         <nav >
             <button onClick={onClick}
-                    className='buttonsize br3  grey grow link bg-washed-yellow shadow-5 pointer'>Save
+                    className='buttonsize br3 grey grow shadow-5 create-btn'>Save
             </button>
         </nav>);
 }

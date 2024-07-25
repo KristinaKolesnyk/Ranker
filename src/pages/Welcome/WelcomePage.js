@@ -33,16 +33,15 @@ class WelcomePage extends React.Component {
         return (
             <div className='WelcomePage'>
                 <div className='header-text'>
-                    <h1 className='rankertext f-headline washed-yellow '>The Ranker</h1>
+                    <h1 className='f-headline washed-yellow '>The Ranker</h1>
                     <Navigation isSignedIn={isSignedIn}/>
 
                 </div>
 
                 <div className='header-text'>
-                    <h2 className='rankertext f1 washed-yellow'>Where Decisions Become Easy</h2>
                     {this.props.user.name ?
-                        <h2 className='welcome-text f1 welcometext washed-yellow'>Welcome, {this.props.user.name}</h2>
-                        : <h2 className='welcome-text f1 welcometext washed-yellow'>Welcome, Guest</h2>
+                        <h2 className='washed-yellow'>{this.props.user.name}, We Make Decisions Easy for You</h2>
+                        : <h2 className='washed-yellow'>Where Decisions Become Easy</h2>
                     }
                 </div>
 

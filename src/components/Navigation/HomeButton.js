@@ -11,7 +11,7 @@ const HomeButton = () => {
     return (
         <nav >
             <button onClick={handleClickHome}
-                    className='br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Home Page
+                    className='br3 pa3 ma3 grey grow btn shadow-5'>Home Page
             </button>
         </nav>);
 }

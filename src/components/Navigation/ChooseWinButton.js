@@ -2,10 +2,11 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 
 
-const ChooseWinButton = () => {
+
+const ChooseWinButton = ({items}) => {
     let navigate = useNavigate();
     const handleClick = () => {
-        navigate('/bracketpage');
+        navigate('/bracketpage', {state: {items }});
     }
 
     return (

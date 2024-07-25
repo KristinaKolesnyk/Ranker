@@ -13,7 +13,7 @@ const CancelButton = () => {
     return (
         <nav >
             <button onClick={handleClick}
-                    className=' buttonsize br3 grey grow link bg-washed-yellow shadow-5 pointer'>Cancel
+                    className='buttonsize br3 grey grow shadow-5 create-btn'>Cancel
             </button>
         </nav>);
 }

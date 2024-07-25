@@ -1,12 +1,12 @@
 import React from 'react';
-
+import "./ButtonSize.css"
 
 const CreatButton = ({onClick}) => {
 
     return (
         <nav >
             <button onClick={onClick}
-                    className=' tr br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Creat list
+                    className='create-btn br3 pa3 ma3 grey grow shadow-5'>Creat list
             </button>
         </nav>);
 }

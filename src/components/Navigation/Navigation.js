@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import "./ButtonSize.css";
 
 const Navigation = ({onRouteChange, isSignedIn}) => {
     let navigate = useNavigate();
@@ -16,17 +17,17 @@ const Navigation = ({onRouteChange, isSignedIn}) => {
     if (isSignedIn) {
         return (<nav style={{display:'flex', justifyContent: 'flex-end', alignItems:'center'}}>
             <button onClick={handleClickHome}
-                    className=' tr br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Sign out
+                    className='br3 pa3 grey grow btn shadow-5'>Sign out
             </button>
         </nav>);
     } else {
         return (
-            <nav style={{display:'flex', justifyContent: 'flex-end', alignItems:'center'}}>
+            <nav style={{display:'flex', justifyContent: 'flex-end', alignItems:'center', gap: 10}}>
                 <button onClick={handleClickSign}
-                        className='tr br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Sign in
+                        className='br3 pa3 grey grow btn shadow-5'>Sign in
                 </button>
                 <button onClick={handleClickRegister}
-                        className='tr br3 pa3 ma3 grey grow link bg-washed-yellow shadow-5 pointer'>Sign up
+                        className='br3 pa3 grey grow btn shadow-5'>Sign up
                 </button>
             </nav>);
     }

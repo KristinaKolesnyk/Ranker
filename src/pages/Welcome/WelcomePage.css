@@ -12,11 +12,9 @@ body{
 
 
 .rankertext {
-  padding-left: 0px;
+  padding-left: 60px;
 }
-.welcometext {
-  padding-right: 15px;
-}
+
 
 .tc {
   text-align: center;
@@ -32,6 +30,8 @@ body{
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    padding-left: 60px;
+    padding-right: 20px;
 }
 
 .sub-text {

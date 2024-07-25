@@ -3,3 +3,25 @@
     width: 83px;
     align-items: center;
 }
+
+.btn {
+    cursor: pointer;
+    background-color: #fffceb;
+    align-content: center;
+}
+
+
+.btn:hover {
+    background-color: #FCF3CF;
+}
+
+.create-btn {
+    cursor: pointer;
+    background-color: #fffceb;
+    align-content: center;
+}
+
+
+.create-btn:hover {
+    background-color: #D4E6F1;
+}
