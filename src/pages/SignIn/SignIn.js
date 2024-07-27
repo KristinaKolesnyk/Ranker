@@ -14,7 +14,7 @@ let config = {
 };
 
 
-const SignIn = () => {
+const SignIn = ({loadUser}) => {
     const [signInEmail, setSignInEmail] = useState('');
     const [signInPassword, setSignInPassword] = useState('');
     let navigate = useNavigate();
@@ -35,9 +35,9 @@ const SignIn = () => {
             },
             body: JSON.stringify({email: signInEmail, password: signInPassword})
         }).then(response => response.json())
-            .then(data => {
-                if (data === 'Success') {
-                    alert('Sign in successful');
+            .then(user => {
+                if (user.id) {
+                    loadUser(user);
                     navigate('/');
                 } else {
                     alert('Incorrect credentials');
