@@ -21,13 +21,21 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
         setRating(newRatings);
     }
 
+    const calculateAverageRating = () => {
+        const numericRatings = ratings.map(r => parseFloat(r)).filter(r => !isNaN(r));
+        const sum = numericRatings.reduce((acc, val) => acc + val, 0);
+        const average = numericRatings.length > 0 ? sum / numericRatings.length : 0;
+        return parseFloat(average.toFixed(1));
+    }
+
     const handleSubmit = () => {
+        const averageRating = calculateAverageRating();
         const newItem = {
             id: (categoryData.items?.length || 0) + 1,
             name: itemName,
             criterions: ratings,
             URL: url,
-            rating: 3,
+            rating: averageRating,
         };
         setCategoryData({
             ...categoryData,  // keep all other properties the same, just add new item to items array
@@ -60,7 +68,7 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
                         <input
                             key={i}
                             className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                            type="text" name={`rating${i}`} id={`rating${i}`}
+                            type="number" name={`rating${i}`} id={`rating${i}`}
                             placeholder={`Enter a rating for ${criterion.toLowerCase()}`}
                             value={ratings[i]}
                             onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
@@ -69,11 +77,11 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
 
                     <input
                         className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                        type="text" name="url" id="url" placeholder='Enter URL (optional)'
+                        type="url" name="url" id="url" placeholder='Enter URL (optional)'
                         value={url}
                         onChange={(e) => setUrl(e.target.value)}  // Call the parent function when the input changes.
                     />
-                    <div className='button input-container'>
+                    <div className='button-container'>
                         <SaveButton onClick={handleSubmit}/>
                         <CancelButton/>
                     </div>

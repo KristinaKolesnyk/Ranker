@@ -16,7 +16,6 @@ const ItemList = ({items, inputs}) => {
                             url={item.URL}
                             rating={item.rating}
                             inputs={inputs}
-
                         />
                     );
                 })}

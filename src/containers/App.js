@@ -12,19 +12,24 @@ import BracketPage from "../pages/BracketPage/BracketPage";
 const App = () => {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [categoryData, setCategoryData] = useState({});
-    const [user, setUser] = useState({}); // Update
-    const navigate = useNavigate(); // Update
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
 
     const loadUser = (userData) =>{
         setUser(userData);
+        setIsSignedIn(true);
+    }
+    const signOut = () => {
+        setUser({});
+        setIsSignedIn(false);
+        navigate('/');
     }
 
     return (
-
         <div>
             <Routes>
                 <Route exact path='/'
-                       index element={<WelcomePage isSignedIn={isSignedIn} user={user}/>}/>
+                       index element={<WelcomePage isSignedIn={isSignedIn} user={user} signOut={signOut}/>}/>
                 <Route path='/creatlist' element={<CreatListPage  setCategoryData={setCategoryData}/>}/>
                 <Route path='/signin' element={<SignIn loadUser={loadUser}/>}/>
                 <Route path='/signup' element={<SignUp loadUser={loadUser}/>}/>

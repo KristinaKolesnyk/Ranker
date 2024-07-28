@@ -16,14 +16,14 @@ const Item = ({name, id, criterions, url, rating}) => {
             <div><h3>{rating}</h3></div>
 
             <div className='button'>
-                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5">
+                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height : 50}}>
                     <img
-                        alt='edit' src={`/img/edit.png`} width='35' height='35'/>
+                        alt='edit' src={`/img/edit.png`}/>
                 </div>
 
-                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5">
+                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height: 50}}>
                     <img
-                        alt='delete' src={`/img/delete.png`} width='35' height='35'/>
+                        alt='delete' src={`/img/delete.png`} />
                 </div>
             </div>
         </div>

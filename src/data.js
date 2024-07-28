@@ -2,240 +2,241 @@ export const itemsByCategory = {
     "Movies": [
         {
             id: 1,
-            name: 'Kitzi',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'Inception',
+            criterions: [9, 9, 9, 8], // Special Effects, Cultural Impact, Entertainment Value, Technical Aspects
+            URL: 'https://www.imdb.com/title/tt1375666/',
+            rating: 8.8
         },
         {
             id: 2,
-            name: 'Jason',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'The Matrix',
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/title/tt0133093/',
+            rating: 9.0
         },
         {
             id: 3,
-            name: 'Milky Way',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'Interstellar',
+            criterions: [9, 8, 9, 9],
+            URL: 'https://www.imdb.com/title/tt0816692/',
+            rating: 8.8
         },
         {
             id: 4,
-            name: 'Braddy',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'The Dark Knight',
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/title/tt0468569/',
+            rating: 9.0
         },
         {
             id: 5,
-            name: 'Jeremmy',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'Pulp Fiction',
+            criterions: [8, 9, 9, 8],
+            URL: 'https://www.imdb.com/title/tt0110912/',
+            rating: 8.5
         },
         {
             id: 6,
-            name: 'Baron Munhausen',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie1',
-            rating: 5
+            name: 'The Shawshank Redemption',
+            criterions: [8, 9, 9, 9],
+            URL: 'https://www.imdb.com/title/tt0111161/',
+            rating: 8.8
         },
         {
             id: 7,
-            name: 'Tilly-Willy',
-            criterions: [4, 5, 6, 6],
-            URL: 'https://example.com/movie2',
-            rating: 4
+            name: 'The Godfather',
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/title/tt0068646/',
+            rating: 9.0
         }
     ],
     "Favorite Food": [
         {
             id: 1,
             name: 'Pizza',
-            criterions: [5, 5, 5, 4],
-            URL: 'https://example.com/food1',
-            rating: 5
+            criterions: [9, 9, 6, 7], // Taste, Appearance, Nutritional Value, Price
+            URL: 'https://www.allrecipes.com/recipe/22180/pizza/',
+            rating: 7.8
         },
         {
             id: 2,
             name: 'Sushi',
-            criterions: [5, 4, 5, 4],
-            URL: 'https://example.com/food2',
-            rating: 4
+            criterions: [9, 8, 6, 7],
+            URL: 'https://www.allrecipes.com/recipe/24239/sushi-roll/',
+            rating: 7.5
         },
         {
             id: 3,
             name: 'Burger',
-            criterions: [4, 4, 5, 3],
-            URL: 'https://example.com/food3',
-            rating: 4
+            criterions: [8, 8, 5, 6],
+            URL: 'https://www.allrecipes.com/recipe/25473/the-perfect-basic-burger/',
+            rating: 6.8
         },
         {
             id: 4,
             name: 'Pasta',
-            criterions: [5, 3, 5, 4],
-            URL: 'https://example.com/food4',
-            rating: 4
+            criterions: [8, 8, 6, 7],
+            URL: 'https://www.allrecipes.com/recipe/12089/good-ol-fashioned-pancakes/',
+            rating: 7.3
         },
         {
             id: 5,
             name: 'Steak',
-            criterions: [5, 5, 4, 5],
-            URL: 'https://example.com/food5',
-            rating: 5
+            criterions: [9, 9, 6, 8],
+            URL: 'https://www.allrecipes.com/recipe/30522/marinated-flank-steak/',
+            rating: 8.0
         }
     ],
     "Lovely Pets": [
         {
             id: 1,
             name: 'Dog',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/pet1',
-            rating: 5
+            criterions: [9, 6, 7, 9], // Affection, Maintenance, Lifespan, Compatibility
+            URL: 'https://www.akc.org/dog-breeds/',
+            rating: 7.8
         },
         {
             id: 2,
             name: 'Cat',
-            criterions: [5, 5, 4, 5],
-            URL: 'https://example.com/pet2',
-            rating: 5
+            criterions: [8, 6, 7, 9],
+            URL: 'https://www.cfa.org/Breeds',
+            rating: 7.5
         },
         {
             id: 3,
             name: 'Parrot',
-            criterions: [4, 4, 4, 4],
-            URL: 'https://example.com/pet3',
-            rating: 4
+            criterions: [7, 6, 6, 7],
+            URL: 'https://lafeber.com/pet-birds/breed/',
+            rating: 6.5
         },
         {
             id: 4,
             name: 'Hamster',
-            criterions: [3, 4, 4, 3],
-            URL: 'https://example.com/pet4',
-            rating: 4
+            criterions: [6, 5, 5, 6],
+            URL: 'https://www.rspca.org.uk/adviceandwelfare/pets/rodents/hamsters',
+            rating: 5.5
         },
         {
             id: 5,
             name: 'Fish',
-            criterions: [3, 3, 4, 3],
-            URL: 'https://example.com/pet5',
-            rating: 3
+            criterions: [5, 5, 3, 5],
+            URL: 'https://www.petmd.com/fish',
+            rating: 4.5
         }
     ],
     "Cool Cars": [
         {
             id: 1,
             name: 'Tesla Model S',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/car1',
-            rating: 5
+            criterions: [9, 9, 9, 8], // Performance, Design, Comfort, Fuel Efficiency
+            URL: 'https://www.tesla.com/models',
+            rating: 8.8
         },
         {
             id: 2,
             name: 'BMW M3',
-            criterions: [5, 5, 4, 4],
-            URL: 'https://example.com/car2',
-            rating: 5
+            criterions: [9, 8, 8, 7],
+            URL: 'https://www.bmwusa.com/vehicles/m-models/m3.html',
+            rating: 8.0
         },
         {
             id: 3,
             name: 'Audi R8',
-            criterions: [5, 4, 5, 4],
-            URL: 'https://example.com/car3',
-            rating: 4
+            criterions: [9, 8, 7, 7],
+            URL: 'https://www.audiusa.com/us/web/en/models/r8/r8-coupe/2022/overview.html',
+            rating: 7.8
         },
         {
             id: 4,
             name: 'Mercedes-Benz S-Class',
-            criterions: [5, 4, 4, 5],
-            URL: 'https://example.com/car4',
-            rating: 5
+            criterions: [9, 9, 9, 8],
+            URL: 'https://www.mbusa.com/en/vehicles/class/s-class/sedan',
+            rating: 8.8
         },
         {
             id: 5,
             name: 'Porsche 911',
-            criterions: [5, 5, 5, 4],
-            URL: 'https://example.com/car5',
-            rating: 5
+            criterions: [9, 9, 8, 7],
+            URL: 'https://www.porsche.com/usa/models/911/',
+            rating: 8.3
         }
     ],
     "Best Games": [
         {
             id: 1,
             name: 'The Witcher 3',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/game1',
-            rating: 5
+            criterions: [9, 9, 9, 9], // Graphics, Gameplay, Storyline, Replay Value
+            URL: 'https://thewitcher.com/en/witcher3',
+            rating: 9.0
         },
         {
             id: 2,
             name: 'Cyberpunk 2077',
-            criterions: [4, 4, 5, 4],
-            URL: 'https://example.com/game2',
-            rating: 4
+            criterions: [8, 7, 7, 7],
+            URL: 'https://www.cyberpunk.net/',
+            rating: 7.3
         },
         {
             id: 3,
             name: 'Red Dead Redemption 2',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/game3',
-            rating: 5
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.rockstargames.com/reddeadredemption2/',
+            rating: 9.0
         },
         {
             id: 4,
             name: 'GTA V',
-            criterions: [5, 5, 4, 5],
-            URL: 'https://example.com/game4',
-            rating: 5
+            criterions: [8, 9, 9, 9],
+            URL: 'https://www.rockstargames.com/V/',
+            rating: 8.8
         },
         {
             id: 5,
             name: 'The Legend of Zelda',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/game5',
-            rating: 5
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.zelda.com/',
+            rating: 9.0
         }
     ],
     "Actors": [
         {
             id: 1,
             name: 'Leonardo DiCaprio',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/actor1',
-            rating: 5
+            criterions: [9, 9, 9, 9], // Acting Skills, Charisma, Versatility, Popularity
+            URL: 'https://www.imdb.com/name/nm0000138/',
+            rating: 9.0
         },
         {
             id: 2,
             name: 'Johnny Depp',
-            criterions: [5, 5, 4, 5],
-            URL: 'https://example.com/actor2',
-            rating: 5
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/name/nm0000136/',
+            rating: 9.0
         },
         {
             id: 3,
             name: 'Robert Downey Jr.',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/actor3',
-            rating: 5
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/name/nm0000375/',
+            rating: 9.0
         },
         {
             id: 4,
             name: 'Scarlett Johansson',
-            criterions: [5, 5, 5, 5],
-            URL: 'https://example.com/actor4',
-            rating: 5
+            criterions: [9, 9, 9, 9],
+            URL: 'https://www.imdb.com/name/nm0424060/',
+            rating: 9.0
         },
         {
             id: 5,
             name: 'Jennifer Lawrence',
-            criterions: [5, 5, 4, 5],
-            URL: 'https://example.com/actor5',
-            rating: 5
+            criterions: [9, 9, 8, 9],
+            URL: 'https://www.imdb.com/name/nm2225369/',
+            rating: 8.8
         }
     ]
 };
+
 
 export const criteriaByCategory = {
     "Movies": ["Special Effects", "Cultural Impact", "Entertainment Value", "Technical Aspects"],

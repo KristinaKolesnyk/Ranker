@@ -23,7 +23,7 @@ class WelcomePage extends React.Component {
 
     render() {
         const {categories, searchField} = this.state;
-        const {isSignedIn} = this.props;
+        const {isSignedIn, signOut} = this.props;
 
         // Filtering the categories based on the search input
         const filteredCategories = categories.filter(category => {
@@ -34,7 +34,7 @@ class WelcomePage extends React.Component {
             <div className='WelcomePage'>
                 <div className='header-text'>
                     <h1 className='f-headline washed-yellow '>The Ranker</h1>
-                    <Navigation isSignedIn={isSignedIn}/>
+                    <Navigation isSignedIn={isSignedIn} signOut={signOut}/>
 
                 </div>
 

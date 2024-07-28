@@ -39,18 +39,14 @@ const SignUp = ({loadUser}) => {
             body: JSON.stringify({name: signUpName,email: signUpEmail, password: signUpPassword})
         }).then(response => response.json())
             .then(user => {
-                if (user) {
+                if (user.id) {
                     loadUser(user);
                     navigate('/');
                 } else {
                     alert('Incorrect credentials');
                 }
             })
-
     }
-    /*const handleClickHome = () => {
-        navigate('/');
-    }*/
 
     return (
         <div>
@@ -65,7 +61,7 @@ const SignUp = ({loadUser}) => {
                                 <label className="db fw6 lh-copy f6" htmlFor='name'>Name</label>
                                 <input onChange={onNameChange}
                                     className="pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100"
-                                    type='text' name="name" id="name"/>
+                                    type='name' name="name" id="name"/>
                             </div>
                             <div className="mt3">
                                 <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>

@@ -19,15 +19,16 @@ html, body {
     margin: 0 auto; /* Центрируем контейнер */
 }
 
-input[type="text"] {
+input[type="text"],[type="url"],[type="number"] {
     width: 100%; /* Ширина поля ввода всегда 100% от контейнера */
     box-sizing: border-box; /* Включаем padding и border в общую ширину и высоту элемента */
     margin: 10px;
 }
-.button {
+.button-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem; /* Space between buttons */
+    margin-top: 1rem; /* Margin above the button container */
 }
 
 .header {
