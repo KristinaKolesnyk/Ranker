@@ -2,7 +2,6 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {criteriaByCategory, itemsByCategory} from "../../data";
 
-
 const Card = ({name, id}) => {
     let navigate = useNavigate();
     const handleClick = () => {
@@ -22,8 +21,5 @@ const Card = ({name, id}) => {
         </div>
     );
 }
-
 export default Card;
 
-
-//`https://robohash.org/${id}?200x200`

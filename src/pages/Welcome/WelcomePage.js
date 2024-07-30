@@ -4,7 +4,6 @@ import Navigation from '../../components/Navigation/Navigation';
 import SearchBox from '../../components/SearchBox';
 import Scroll from '../../components/Scroll';
 import CardList from '../../components/Cards/CardList';
-import AddButton from '../../components/AddButton/AddButton';
 import {categories} from "../../categories";
 
 
@@ -54,9 +53,9 @@ class WelcomePage extends React.Component {
                         <SearchBox searchChange={this.onSearchChange}/>
                     </div>
                     <Scroll>
-                        <div className='tl rankertext'>
+                        <div className='category-container'>
                             <CardList categories={filteredCategories}/>
-                            <AddButton/>
+
                         </div>
                     </Scroll>
                 </div>
@@ -66,4 +65,3 @@ class WelcomePage extends React.Component {
 }
 
 export default WelcomePage;
-

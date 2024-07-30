@@ -10,7 +10,7 @@ const AddButton = () => {
     }
 
     return (
-        <div className='tc dib'>
+        <div className='tc'>
             <div className="bg-washed-yellow br3 grow pa3 ma2 bw2 shadow-5">
                 <img
                     onClick={handleClick}

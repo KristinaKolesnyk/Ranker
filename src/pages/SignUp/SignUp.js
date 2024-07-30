@@ -51,7 +51,7 @@ const SignUp = ({loadUser}) => {
     return (
         <div>
             <ParticlesBg className="config" type="cobweb" config={config} bg={true}/>
-            <article className="tc br3 box-color ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
+            <article className="tc br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center" style={{backgroundColor: '#FEF5E7D8'}}>
                 <main className="pa4 black-80">
                     <div className="measure ">
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">

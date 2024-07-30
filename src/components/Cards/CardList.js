@@ -1,10 +1,12 @@
 import React from 'react';
 import Card from "./Card";
+import AddButton from "../AddButton/AddButton";
 
 const CardList = ({categories}) => {
     return (
-        <div>
+        <div className='card-list-container'>
             {
+
                 categories.map((category, i) => {
                     return (
                         <Card
@@ -14,6 +16,7 @@ const CardList = ({categories}) => {
                         />
                     );
                 })}
+            <AddButton/>
         </div>
     );
 }

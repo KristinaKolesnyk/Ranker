@@ -29,7 +29,7 @@ const App = () => {
         <div>
             <Routes>
                 <Route exact path='/'
-                       index element={<WelcomePage isSignedIn={isSignedIn} user={user} signOut={signOut}/>}/>
+                       index element={<WelcomePage isSignedIn={isSignedIn} user={user} signOut={signOut} categoryData={categoryData}/>}/>
                 <Route path='/creatlist' element={<CreatListPage  setCategoryData={setCategoryData}/>}/>
                 <Route path='/signin' element={<SignIn loadUser={loadUser}/>}/>
                 <Route path='/signup' element={<SignUp loadUser={loadUser}/>}/>

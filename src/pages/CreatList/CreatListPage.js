@@ -43,7 +43,7 @@ const CreatListPage = ({setCategoryData}) => {
 
             <Scroll>
                 <div className='ma4' >
-                    <div className=' input-container box-color icon-place br3 bw2 pa2 shadow-5'>
+                    <div className=' input-container icon-place br3 bw2 pa2 shadow-5' style={{backgroundColor: '#FEF5E766'}}>
                         <AddIcon />
                         <div className=' input-container'>
                             <input
