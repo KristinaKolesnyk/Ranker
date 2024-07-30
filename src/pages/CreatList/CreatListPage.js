@@ -8,9 +8,11 @@ import Scroll from "../../components/Scroll";
 import ComparInput from "../../components/ComparInput";
 
 
-const CreatListPage = ({setCategoryData}) => {
+const CreatListPage = ({setCategoryData, user}) => {
     const [category, setCategory] = useState('');
     const [inputs, setInputs] = useState(['']);
+    //const [userId, setUserId] = useState(['']);
+    //const [categoryName, setCategoryName] = useState('');
     const navigate = useNavigate();
 
     const handleInputChange = (index, event) => {
@@ -27,8 +29,64 @@ const CreatListPage = ({setCategoryData}) => {
 
     const handleSubmit = () => {
         const criteria = inputs.filter(input => input.trim() !== '');
-        setCategoryData({category, criteria, items: []}); // Update the parent component's state.
-        navigate('/yourlist');
+
+        fetch('http://localhost:3000/creatlist', {
+            method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({categoryName: category, userId: user.id, criteriaName:criteria})
+        }).then(response => response.json())
+            .then(data => {
+                if (data) {
+                    console.log(user.id);
+                    console.log(criteria);
+                    setCategory(category)
+                    //setInputs(criteria);
+                    navigate('/');
+                } else {
+                    alert('Incorrect credentials');
+                }
+            })
+
+       /* if (!user.id) {
+            alert('Please sign in to create a list');
+            return;
+        }
+        const payload = {
+            userId: user.id,
+            categoryName: category,
+            criteria: criteria
+        };
+
+        console.log('Sending payload:', payload);
+
+        fetch('http://localhost:3000/creatlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        }).then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Server Error: ', data.error);
+                    alert('Failed to create list')
+                } else {
+                    setCategoryData(prevData => ({
+                        ...prevData,
+                        [category]: {
+                            id: data.categoryId,
+                            name: category,
+                            criteria,
+                            items: []
+                        }
+                    }));
+                    navigate('/yourlist');
+                }
+
+            }).catch(error => console.error('Error: ', error))
+        */
     }
 
     return (
@@ -42,9 +100,10 @@ const CreatListPage = ({setCategoryData}) => {
             <h1>COMPARE ALL</h1>
 
             <Scroll>
-                <div className='ma4' >
-                    <div className=' input-container icon-place br3 bw2 pa2 shadow-5' style={{backgroundColor: '#FEF5E766'}}>
-                        <AddIcon />
+                <div className='ma4'>
+                    <div className=' input-container icon-place br3 bw2 pa2 shadow-5'
+                         style={{backgroundColor: '#FEF5E766'}}>
+                        <AddIcon/>
                         <div className=' input-container'>
                             <input
                                 className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"

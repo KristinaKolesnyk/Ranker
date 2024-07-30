@@ -30,7 +30,7 @@ const App = () => {
             <Routes>
                 <Route exact path='/'
                        index element={<WelcomePage isSignedIn={isSignedIn} user={user} signOut={signOut} categoryData={categoryData}/>}/>
-                <Route path='/creatlist' element={<CreatListPage  setCategoryData={setCategoryData}/>}/>
+                <Route path='/creatlist' element={<CreatListPage  setCategoryData={setCategoryData} user={user}/>}/>
                 <Route path='/signin' element={<SignIn loadUser={loadUser}/>}/>
                 <Route path='/signup' element={<SignUp loadUser={loadUser}/>}/>
                 <Route path='/yourlist' element={<YourListPage categoryData={categoryData}/>}/>
