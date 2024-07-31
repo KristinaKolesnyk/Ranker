@@ -54,7 +54,6 @@ class WelcomePage extends React.Component {
                     </div>
                     <Scroll>
                         <div className='category-container'>
-                            {console.log(this.props.user.id)}
                             <CardList categories={filteredCategories}/>
 
                         </div>

@@ -11,8 +11,7 @@ import ComparInput from "../../components/ComparInput";
 const CreatListPage = ({setCategoryData, user}) => {
     const [category, setCategory] = useState('');
     const [inputs, setInputs] = useState(['']);
-    //const [userId, setUserId] = useState(['']);
-    //const [categoryName, setCategoryName] = useState('');
+
     const navigate = useNavigate();
 
     const handleInputChange = (index, event) => {
@@ -28,65 +27,39 @@ const CreatListPage = ({setCategoryData, user}) => {
     }
 
     const handleSubmit = () => {
-        const criteria = inputs.filter(input => input.trim() !== '');
-
-        fetch('http://localhost:3000/creatlist', {
-            method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({categoryName: category, userId: user.id, criteriaName:criteria})
-        }).then(response => response.json())
-            .then(data => {
-                if (data) {
-                    console.log(user.id);
-                    console.log(criteria);
-                    setCategory(category)
-                    //setInputs(criteria);
-                    navigate('/');
-                } else {
-                    alert('Incorrect credentials');
-                }
-            })
-
-       /* if (!user.id) {
+        if (!user.id) {
             alert('Please sign in to create a list');
             return;
         }
-        const payload = {
-            userId: user.id,
-            categoryName: category,
-            criteria: criteria
-        };
-
-        console.log('Sending payload:', payload);
+        const criteriaNames = inputs.filter(input => input.trim() !== '');
 
         fetch('http://localhost:3000/creatlist', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                categoryName: category,
+                userId: user.id,
+                criteriaName: criteriaNames
+            })
         }).then(response => response.json())
             .then(data => {
-                if (data.error) {
-                    console.error('Server Error: ', data.error);
-                    alert('Failed to create list')
-                } else {
+                if (data) {
                     setCategoryData(prevData => ({
                         ...prevData,
                         [category]: {
-                            id: data.categoryId,
+                            id: data.collection.category_id,
                             name: category,
-                            criteria,
+                            criteria: criteriaNames,
                             items: []
                         }
                     }));
-                    navigate('/yourlist');
+                    navigate('/');
+                } else {
+                    alert('Incorrect credentials');
                 }
-
-            }).catch(error => console.error('Error: ', error))
-        */
+            })
     }
 
     return (
@@ -117,6 +90,7 @@ const CreatListPage = ({setCategoryData, user}) => {
                                     onChange={(e) => handleInputChange(index, e)}
                                 />
                             ))}
+
                             <CreatButton className='center' onClick={handleSubmit}/>
                         </div>
 
@@ -124,6 +98,7 @@ const CreatListPage = ({setCategoryData, user}) => {
                 </div>
             </Scroll>
         </div>
+
     );
 }
 
