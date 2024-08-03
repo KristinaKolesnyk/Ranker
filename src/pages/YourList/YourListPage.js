@@ -15,7 +15,7 @@ const YourListPage = ({categoryData}) => {
     const state = location.state || categoryData || {};
     const {category,criteria=[], inputs=[], items=[]} = state;
     const allCriteria = [...criteria, ...inputs.filter(input => input.trim()!== '')];
-
+//change
     return (
         <div className='tc'>
             <div className='header'>
