@@ -10,6 +10,7 @@ import ComparInput from "../../components/ComparInput";
 
 const CreatListPage = ({setCategoryData, user}) => {
     const [category, setCategory] = useState('');
+   // const [criterion, setCriterion] = useState(['']);
     const [inputs, setInputs] = useState(['']);
 
     const navigate = useNavigate();
@@ -49,16 +50,21 @@ const CreatListPage = ({setCategoryData, user}) => {
                     setCategoryData(prevData => ({
                         ...prevData,
                         [category]: {
-                            id: data.collection.category_id,
+                            id: data.category.id,
                             name: category,
                             criteria: criteriaNames,
                             items: []
+                        },
+                        [criteriaNames]: {
+                            id: data.criteria.id,
+                            name: criteriaNames
                         }
                     }));
+                    console.log(data)
                     navigate('/yourlist', {
                         state: {
                             category: category,
-                            criteria: criteriaNames,
+                            criteria: data.criterion,
                             items: []
                         }
                     });
@@ -67,7 +73,6 @@ const CreatListPage = ({setCategoryData, user}) => {
                 }
             })
     }
-//change
     return (
         <div className='tc'>
             <div className='header'>
@@ -96,7 +101,6 @@ const CreatListPage = ({setCategoryData, user}) => {
                                     onChange={(e) => handleInputChange(index, e)}
                                 />
                             ))}
-
                             <CreatButton className='center' onClick={handleSubmit}/>
                         </div>
 

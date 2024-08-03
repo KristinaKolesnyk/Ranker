@@ -44,7 +44,6 @@ const SignIn = ({loadUser}) => {
                 }
             })
     }
-    //change
 
     const handleClickRegister = () => {
         navigate('/signup');

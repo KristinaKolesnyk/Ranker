@@ -13,7 +13,7 @@ const ItemList = ({items, inputs}) => {
                             id={item.id}
                             name={item.name}
                             criterions={item.criterions}
-                            url={item.URL}
+                            url={item.url}
                             rating={item.rating}
                             inputs={inputs}
                         />

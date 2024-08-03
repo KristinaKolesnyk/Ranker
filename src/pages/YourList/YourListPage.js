@@ -14,8 +14,8 @@ const YourListPage = ({categoryData}) => {
     const location = useLocation();
     const state = location.state || categoryData || {};
     const {category,criteria=[], inputs=[], items=[]} = state;
-    const allCriteria = [...criteria, ...inputs.filter(input => input.trim()!== '')];
-//change
+    const allCriteria = [...criteria, category, ...inputs.filter(input => input.trim()!== '')];
+
     return (
         <div className='tc'>
             <div className='header'>
@@ -50,7 +50,7 @@ const YourListPage = ({categoryData}) => {
 
 
             <AddItem criteria={allCriteria} />
-            <ChooseWinButton items={categoryData.items}/>
+            <ChooseWinButton items={items}/>
             </Scroll>
         </div>
     );

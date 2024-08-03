@@ -7,11 +7,11 @@ import SaveButton from "../../components/Navigation/SaveButton";
 import CancelButton from "../../components/Navigation/CancelButton";
 
 
-const AddToListPage = ({categoryData, setCategoryData}) => {
+const AddToListPage = ({categoryData, setCategoryData, user}) => {
     const location = useLocation();
-    const {criteria = []} = location.state || {criteria: []};
+    const {criteria = [], category} = location.state || {criteria: [], category: null};
     const navigate = useNavigate();
-    const [itemName, setItemName] = useState('');
+    const [item, setItem] = useState('');
     const [url, setUrl] = useState('');
     const [ratings, setRating] = useState(criteria.map(() => ''));
 
@@ -30,20 +30,57 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
 
     const handleSubmit = () => {
         const averageRating = calculateAverageRating();
-        const newItem = {
-            id: (categoryData.items?.length || 0) + 1,
-            name: itemName,
-            criterions: ratings,
-            URL: url,
-            rating: averageRating,
-        };
-        setCategoryData({
-            ...categoryData,  // keep all other properties the same, just add new item to items array
-            items: [...(categoryData.items || []), newItem]
-        });
-        navigate('/yourlist', {state: {...categoryData, items: [...categoryData.items, newItem]}});
+        const criterionIds = criteria.map(c => c.id)
+        const categoryId = category;
+
+        if (!user.id) {
+            alert('Please sign in to create a list');
+            return;
+        }
+        console.log('Data received:',
+            '\nitemName: ' + item,
+            '\ncategoryId: ' + categoryId,
+            '\nitemUrl: ' + url,
+            '\nratingValue: ' + ratings,
+            '\navgRating: ' + averageRating,
+            '\ncriterionIds: ' + criterionIds)
+
+        fetch('http://localhost:3000/creatlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                itemName: item,
+                categoryId: categoryId,
+                itemUrl: url,
+                ratingValue: ratings,
+                avgRating: averageRating,
+                criterionIds: criterionIds
+            })
+        }).then(response => response.json())
+            .then(data => {
+                const newItem = {
+                    itemName: item,
+                    categoryId: categoryId,
+                    itemUrl: url,
+                    ratingValue: ratings,
+                    avgRating: averageRating,
+                    criterionIds: criterionIds
+                };
+                if (data) {
+                    const updatedItems = [...(categoryData.items || []), newItem];
+                    setCategoryData({
+                        ...categoryData,
+                        items: updatedItems
+                    });
+
+                    navigate('/yourlist', {state: {...categoryData, items: updatedItems}});
+                } else {
+                    alert('Incorrect credentials');
+                }
+            })
     }
-    //change
 
     return (
         <div className='tc'>
@@ -61,8 +98,8 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
                     <input
                         className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                         type="text" name="itemName" id="itemName" placeholder='Enter name'
-                        value={itemName}
-                        onChange={(e) => setItemName(e.target.value)}  // Call the parent function when the input changes.
+                        value={item}
+                        onChange={(e) => setItem(e.target.value)}  // Call the parent function when the input changes.
                     />
 
                     {criteria.map((criterion, i) => (
@@ -70,7 +107,7 @@ const AddToListPage = ({categoryData, setCategoryData}) => {
                             key={i}
                             className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                             type="number" name={`rating${i}`} id={`rating${i}`}
-                            placeholder={`Enter a rating for ${criterion.toLowerCase()}`}
+                            placeholder={`Enter a rating for ${(criterion?.name || '').toLowerCase()}`}
                             value={ratings[i]}
                             onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
                         />
