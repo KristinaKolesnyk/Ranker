@@ -55,7 +55,13 @@ const CreatListPage = ({setCategoryData, user}) => {
                             items: []
                         }
                     }));
-                    navigate('/');
+                    navigate('/yourlist', {
+                        state: {
+                            category: category,
+                            criteria: criteriaNames,
+                            items: []
+                        }
+                    });
                 } else {
                     alert('Incorrect credentials');
                 }

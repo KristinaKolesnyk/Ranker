@@ -43,7 +43,6 @@ const SignIn = ({loadUser}) => {
                     alert('Incorrect credentials');
                 }
             })
-
     }
 
     const handleClickRegister = () => {

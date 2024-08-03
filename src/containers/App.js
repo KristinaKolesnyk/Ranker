@@ -33,8 +33,8 @@ const App = () => {
                 <Route path='/creatlist' element={<CreatListPage  setCategoryData={setCategoryData} user={user}/>}/>
                 <Route path='/signin' element={<SignIn loadUser={loadUser}/>}/>
                 <Route path='/signup' element={<SignUp loadUser={loadUser}/>}/>
-                <Route path='/yourlist' element={<YourListPage categoryData={categoryData}/>}/>
-                <Route path='/addtolist' element={<AddToListPage categoryData={categoryData} setCategoryData={setCategoryData}/>}/>
+                <Route path='/yourlist' element={<YourListPage categoryData={categoryData} user={user}/>}/>
+                <Route path='/addtolist' element={<AddToListPage categoryData={categoryData} setCategoryData={setCategoryData} user={user}/>}/>
                 <Route path='/bracketpage' element={<BracketPage categoryData={categoryData}/>}/>
             </Routes>
         </div>
