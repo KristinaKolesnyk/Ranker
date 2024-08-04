@@ -1,4 +1,4 @@
-export const items = [
+/*export const items = [
     {
         id: 1,
         name: 'Kitzi',
@@ -50,4 +50,4 @@ export const items = [
         URL: 'https://example.com/movie2',
         rating: 4
     }
-];
+];*/

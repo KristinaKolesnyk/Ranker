@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AddIcon = () => {
+const AddIcon = ({onIconUpload}) => {
     const [image, setImage] = useState(null);
     const [imageName, setImageName] = useState('Upload Icon');
 
@@ -17,7 +17,10 @@ const AddIcon = () => {
                 body: formData,
             })
                 .then(response => response.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    console.log(data)
+                    onIconUpload(data.imageUrl)
+                })
                 .catch(error => console.error('Error uploading image:', error));
         }
     }

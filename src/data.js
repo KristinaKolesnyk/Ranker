@@ -1,4 +1,4 @@
-export const itemsByCategory = {
+/*export const itemsByCategory = {
     "Movies": [
         {
             id: 1,
@@ -246,3 +246,4 @@ export const criteriaByCategory = {
     "Best Games": ["Graphics", "Gameplay", "Storyline", "Replay Value"],
     "Actors": ["Acting Skills", "Charisma", "Versatility", "Popularity"]
 };
+*/

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import './CreatList.css';
-import AddIcon from "../../components/AddButton/AddIcon/AddIcon";
+import AddIcon from "../../components/AddButton/AddIcon";
 import CreatButton from "../../components/Navigation/CreatButton";
 import Scroll from "../../components/Scroll";
 import ComparInput from "../../components/ComparInput";
@@ -10,8 +10,8 @@ import ComparInput from "../../components/ComparInput";
 
 const CreatListPage = ({setCategoryData, user}) => {
     const [category, setCategory] = useState('');
-   // const [criterion, setCriterion] = useState(['']);
     const [inputs, setInputs] = useState(['']);
+    const [iconUrl, setIconUrl] = useState('');
 
     const navigate = useNavigate();
 
@@ -26,6 +26,9 @@ const CreatListPage = ({setCategoryData, user}) => {
     const handleCategoryChange = (event) => {
         setCategory(event.target.value);
     }
+    const handleIconUpload = (url) => {
+        setIconUrl(url);
+    }
 
     const handleSubmit = () => {
         if (!user.id) {
@@ -33,7 +36,7 @@ const CreatListPage = ({setCategoryData, user}) => {
             return;
         }
         const criteriaNames = inputs.filter(input => input.trim() !== '');
-
+        console.log(iconUrl)
         fetch('http://localhost:3000/creatlist', {
             method: 'POST',
             headers: {
@@ -42,7 +45,8 @@ const CreatListPage = ({setCategoryData, user}) => {
             body: JSON.stringify({
                 categoryName: category,
                 userId: user.id,
-                criteriaName: criteriaNames
+                criteriaName: criteriaNames,
+                iconUrl: iconUrl
             })
         }).then(response => response.json())
             .then(data => {
@@ -60,7 +64,6 @@ const CreatListPage = ({setCategoryData, user}) => {
                             name: criteriaNames
                         }
                     }));
-                    console.log(data)
                     navigate('/yourlist', {
                         state: {
                             category: category,
@@ -87,7 +90,7 @@ const CreatListPage = ({setCategoryData, user}) => {
                 <div className='ma4'>
                     <div className=' input-container icon-place br3 bw2 pa2 shadow-5'
                          style={{backgroundColor: '#FEF5E766'}}>
-                        <AddIcon/>
+                        <AddIcon onIconUpload ={handleIconUpload}/>
                         <div className=' input-container'>
                             <input
                                 className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"

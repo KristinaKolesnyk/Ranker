@@ -1,4 +1,4 @@
-export const categories = [
+/*export const categories = [
     {
         id: 1,
         name: 'Movies',
@@ -23,4 +23,4 @@ export const categories = [
         id: 6,
         name: 'Actors'
     }
-];
+];*/
