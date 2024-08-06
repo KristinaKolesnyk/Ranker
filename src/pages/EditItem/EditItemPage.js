@@ -9,19 +9,27 @@ import CancelButton from "../../components/Navigation/CancelButton";
 
 const EditItemPage = () => {
     const location = useLocation();
-    const {id, name, criterions, url: initialUrl, criteria, categoryId, categoryName} = location.state || {criteria: [], criterions: []};
+    const {
+        id,
+        name,
+        criterions,
+        url: initialUrl,
+        criteria = [],
+        categoryId,
+        categoryName
+    } = location.state || {criteria: [], criterions: [], categoryId: null, categoryName: null};
     const navigate = useNavigate();
-    const [url, setUrl] = useState(initialUrl||'');
-    const [ratings, setRating] = useState(criteria.map(c =>{
+    const [url, setUrl] = useState(initialUrl || '');
+    const [ratings, setRating] = useState(criteria.map(c => {
         const criterion = criterions.find(cr => cr.criterion_id === c.id);
         return criterion ? criterion.value : '-';
     }));
 
-    useEffect(() =>{
-        if(!location.state){
+    useEffect(() => {
+        if (!location.state) {
             navigate('/yourlist');
         }
-    },[location.state, navigate])
+    }, [location.state, navigate])
 
     const handleInputChange = (index, event) => {
         const newRatings = [...ratings];
@@ -49,12 +57,12 @@ const EditItemPage = () => {
             return response.json();
         })
             .then(() => {
+                console.log('Updated item:', categoryId, categoryName)
                 navigate('/yourlist', {
-                    state: {categoryId, categoryName, criteria, items: location.state.items},
+                    state: {categoryId, categoryName},
                     replace: true
-                })
-
-                if(location.state.onItemAdded){
+                });
+                if (location.state.onItemAdded) {
                     location.state.onItemAdded();
                 }
             })
@@ -73,27 +81,27 @@ const EditItemPage = () => {
             </div>
 
             <Scroll>
-                    {criteria.map((criterion, i) => (
-                        <input
-                            key={i}
-                            className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                            type="number" name={`rating${i}`} id={`rating${i}`}
-                            placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
-                            value={ratings[i]}
-                            onChange={(e) => handleInputChange(i, e)}
-                        />
-                    ))}
-
+                {criteria.map((criterion, i) => (
                     <input
+                        key={i}
                         className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                        type="url" name="url" id="url" placeholder='Enter URL (optional)'
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
+                        type="number" name={`rating${i}`} id={`rating${i}`}
+                        placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
+                        value={ratings[i]}
+                        onChange={(e) => handleInputChange(i, e)}
                     />
-                    <div className='button-container'>
-                        <SaveButton onClick={handleSubmit}/>
-                        <CancelButton/>
-                    </div>
+                ))}
+
+                <input
+                    className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
+                    type="url" name="url" id="url" placeholder='Enter URL (optional)'
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                />
+                <div className='button-container'>
+                    <SaveButton onClick={handleSubmit}/>
+                    <CancelButton/>
+                </div>
             </Scroll>
         </div>
     );

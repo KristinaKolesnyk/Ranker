@@ -76,7 +76,7 @@ const YourListPage = () => {
 
             <Scroll>
                 <div className='grid-container'>
-                    <ItemList items={items} criteria={criteria} onDelete={handleDeleteItem}/>
+                    <ItemList items={items} categoryId={categoryId} categoryName={category} criteria={criteria} onDelete={handleDeleteItem}/>
                 </div>
                 <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
                          onItemAdded={fetchCategoryData}/>

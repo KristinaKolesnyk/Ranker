@@ -2,7 +2,7 @@ import React from 'react';
 import './Item.css';
 import {useNavigate} from "react-router-dom";
 
-const Item = ({id, name, criterions, url, avgRating, criteria, onDelete}) => {
+const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categoryName, categoryId}) => {
     const criterionValues = criteria.map(c => {
         const criterion = criterions.find(cr => cr.criterion_id === c.id);
         return criterion ? criterion.value : '-';
@@ -23,8 +23,8 @@ const Item = ({id, name, criterions, url, avgRating, criteria, onDelete}) => {
                 criterions,
                 url,
                 criteria,
-                categoryId: criterions[0]?.category_id,
-                categoryName: criteria[0]?.category_name
+                categoryId,
+                categoryName
             }
         });
     }
