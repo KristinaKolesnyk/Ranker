@@ -7,6 +7,7 @@ import WelcomePage from "../pages/Welcome/WelcomePage";
 import YourListPage from "../pages/YourList/YourListPage";
 import AddToListPage from "../pages/AddToListPage/AddToListPage";
 import BracketPage from "../pages/BracketPage/BracketPage";
+import EditItemPage from "../pages/EditItem/EditItemPage";
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
                 <Route path='/signup' element={<SignUp loadUser={loadUser}/>}/>
                 <Route path='/yourlist' element={<YourListPage categoryData={categoryData} user={user}/>}/>
                 <Route path='/addtolist' element={<AddToListPage categoryData={categoryData} setCategoryData={setCategoryData} user={user}/>}/>
+                <Route path='/edititem' element={<EditItemPage categoryData={categoryData} setCategoryData={setCategoryData} user={user}/>}/>
                 <Route path='/bracketpage' element={<BracketPage categoryData={categoryData}/>}/>
             </Routes>
         </div>

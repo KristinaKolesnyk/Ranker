@@ -1,13 +1,8 @@
 import React from 'react';
-//import {useNavigate} from "react-router-dom";
 import "./ButtonSize.css"
 
 
 const SaveButton = ({onClick}) => {
-   /* let navigate = useNavigate();
-    const handleClick = () => {
-        navigate('/yourlist');
-    }*/
 
     return (
         <nav >

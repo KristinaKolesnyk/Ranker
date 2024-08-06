@@ -1,5 +1,6 @@
 import React from 'react';
 import './Item.css';
+import {useNavigate} from "react-router-dom";
 
 const Item = ({id, name, criterions, url, avgRating, criteria, onDelete}) => {
     const criterionValues = criteria.map(c => {
@@ -7,10 +8,25 @@ const Item = ({id, name, criterions, url, avgRating, criteria, onDelete}) => {
         return criterion ? criterion.value : '-';
     });
 
+    const navigate = useNavigate();
+
     const handleDelete = () => {
         if (window.confirm('Are you sure you want to delete this item?')) {
             onDelete(id);
         }
+    }
+    const handleEdit = () => {
+        navigate('/edititem', {
+            state: {
+                id,
+                name,
+                criterions,
+                url,
+                criteria,
+                categoryId: criterions[0]?.category_id,
+                categoryName: criteria[0]?.category_name
+            }
+        });
     }
 
     return (
@@ -27,7 +43,8 @@ const Item = ({id, name, criterions, url, avgRating, criteria, onDelete}) => {
             <div><h3>{avgRating}</h3></div>
 
             <div className='button'>
-                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height: 50}}>
+                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height: 50}}
+                     onClick={handleEdit}>
                     <img
                         alt='edit' src={`/img/edit.png`}/>
                 </div>
