@@ -46,7 +46,6 @@ class WelcomePage extends React.Component {
         const {isSignedIn, signOut, user} = this.props;
         const navigate = this.props.navigate;
 
-        // Filtering the categories based on the search input
         const filteredCategories = categories.filter(category => {
             return category.name.toLowerCase().includes(searchField.toLowerCase());
         })
@@ -56,7 +55,6 @@ class WelcomePage extends React.Component {
                 <div className='header-text'>
                     <h1 className='f-headline washed-yellow '>The Ranker</h1>
                     <Navigation isSignedIn={isSignedIn} signOut={signOut}/>
-
                 </div>
 
                 <div className='header-text'>
@@ -66,20 +64,15 @@ class WelcomePage extends React.Component {
                     }
                 </div>
 
-                <div className='tc'>
-                    <h1>Categories</h1>
-                </div>
+                <div className='tc'><h1>Categories</h1></div>
 
                 <div className='tc'>
-                    <div>
-                        <SearchBox searchChange={this.onSearchChange}/>
-                    </div>
+                    <div><SearchBox searchChange={this.onSearchChange}/></div>
                     <Scroll>
                         <div className='space'>
-                        <div className='category-container'>
-                            <CardList categories={filteredCategories} navigate ={navigate}/>
-
-                        </div>
+                            <div className='category-container'>
+                                <CardList categories={filteredCategories} navigate={navigate}/>
+                            </div>
                         </div>
                     </Scroll>
                 </div>

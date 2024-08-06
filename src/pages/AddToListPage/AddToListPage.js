@@ -22,7 +22,7 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
     }
 
     const handleSubmit = () => {
-        const newItem ={
+        const newItem = {
             categoryId,
             name: item,
             url,
@@ -40,11 +40,11 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
             }
             return response.json();
         })
-            .then(data =>{
+            .then(data => {
                 console.log('Item added successfully:', data)
                 navigate('/yourlist', {state: {categoryId, categoryName: categoryData.name}})
             })
-            .catch(error =>{
+            .catch(error => {
                 console.error('Error adding item:', error)
             })
     }
@@ -56,12 +56,10 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
                     <HomeButton/>
                 </div>
                 <h1 className='title f1 washed-yellow bold'>Add Item</h1>
-
             </div>
 
             <Scroll>
                 <div className='tc box dib input-container br3 bw2 shadow-5'>
-
                     <input
                         className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                         type="text" name="itemName" id="itemName" placeholder='Enter name'
@@ -70,14 +68,14 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
                     />
 
                     {criteria.map((criterion, i) => (
-                        <input
-                            key={i}
-                            className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                            type="number" name={`rating${i}`} id={`rating${i}`}
-                            placeholder={`Enter a rating for ${(criterion?.name || '').toLowerCase()}`}
-                            value={ratings[i]}
-                            onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
-                        />
+                            <input
+                                key={i}
+                                className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
+                                type="number" name={`rating${i}`} id={`rating${i}`}
+                                placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
+                                value={ratings[i]}
+                                onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
+                            />
                     ))}
 
                     <input

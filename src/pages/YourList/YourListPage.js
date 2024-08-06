@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useLocation} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import '../CreatList/CreatList.css';
 import Scroll from "../../components/Scroll";
@@ -8,9 +8,9 @@ import "./YourList.css";
 import ItemList from "../../components/Items/ItemList";
 import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
-const YourListPage = ({ categoryData }) => {
+const YourListPage = ({categoryData}) => {
     const location = useLocation();
-    const { categoryId, categoryName } = location.state || {};
+    const {categoryId, categoryName} = location.state || {};
     const [category, setCategory] = useState(categoryName || '');
     const [criteria, setCriteria] = useState([]);
     const [items, setItems] = useState([]);
@@ -32,13 +32,11 @@ const YourListPage = ({ categoryData }) => {
         }
     }, [categoryId]);
 
-    const allCriteria = criteria.map(c => c.name);
-
     return (
         <div className='tc'>
             <div className='header'>
                 <div className='home-button'>
-                    <HomeButton />
+                    <HomeButton/>
                 </div>
                 <h1 className='title f1 washed-yellow bold'>Your List</h1>
             </div>
@@ -47,9 +45,9 @@ const YourListPage = ({ categoryData }) => {
             <div className='grid-container'>
                 <div className='grid-header grid-item'>
                     <div><h2> NAME </h2></div>
-                    {allCriteria.map((criterion, i) => (
+                    {criteria.map((criterion, i) => (
                         <div key={i}>
-                            <h2>{criterion.toUpperCase()}</h2>
+                            <h2>{criterion.name.toUpperCase()}</h2>
                         </div>
                     ))}
                     <div><h2> URL </h2></div>
@@ -60,10 +58,10 @@ const YourListPage = ({ categoryData }) => {
 
             <Scroll>
                 <div className='grid-container'>
-                    <ItemList items={items} criteria={criteria} />
+                    <ItemList items={items} criteria={criteria}/>
                 </div>
-                <AddItem criteria={allCriteria} categoryId = {categoryId} categoryName ={category} />
-                <ChooseWinButton items={items} />
+                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}/>
+                <ChooseWinButton items={items}/>
             </Scroll>
         </div>
     );
