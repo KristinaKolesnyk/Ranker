@@ -106,12 +106,10 @@ const CreatListPage = ({setCategoryData, user}) => {
                             ))}
                             <CreatButton className='center' onClick={handleSubmit}/>
                         </div>
-
                     </div>
                 </div>
             </Scroll>
         </div>
-
     );
 }
 

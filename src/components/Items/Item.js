@@ -1,27 +1,32 @@
 import React from 'react';
 import './Item.css';
 
-const Item = ({name, id, criterions, url, rating}) => {
+const Item = ({ name, criterions, url, avgRating, criteria }) => {
+    const criterionValues = criteria.map(c => {
+        const criterion = criterions.find(cr => cr.criterion_id === c.id);
+        console.log(criterion)
+        return criterion ? criterion.value : '-';
+    });
+
+
+
     return (
         <div className='grid-header grid-item'>
             <div><h3>{name}</h3></div>
-            {Array.isArray(criterions)
-                ? criterions.map((criterion, i) =>
-                    <div key={i}><h3>{criterion}</h3>
-                    </div>)
-                : <h3>{criterions}</h3>  // If criteria not an array, just display it as is.
-            }
+            {criterionValues.map((value, index) => (
+                <div key={`${name}-${index}`}><h3>{value}</h3></div>
+            ))}
 
             <div><a href={url} target='_blank' rel='noopener noreferrer'><h3>Visit Site</h3></a></div>
-            <div><h3>{rating}</h3></div>
+            <div><h3>{avgRating}</h3></div>
 
             <div className='button'>
-                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height : 50}}>
+                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{ width: 50, height: 50 }}>
                     <img
-                        alt='edit' src={`/img/edit.png`}/>
+                        alt='edit' src={`/img/edit.png`} />
                 </div>
 
-                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{width: 50, height: 50}}>
+                <div className="bg-washed-yellow br3 grow pa2 ma1 bw2 shadow-5" style={{ width: 50, height: 50 }}>
                     <img
                         alt='delete' src={`/img/delete.png`} />
                 </div>
@@ -31,5 +36,3 @@ const Item = ({name, id, criterions, url, rating}) => {
 }
 
 export default Item;
-
-

@@ -4,8 +4,7 @@ import Navigation from '../../components/Navigation/Navigation';
 import SearchBox from '../../components/SearchBox';
 import Scroll from '../../components/Scroll';
 import CardList from '../../components/Cards/CardList';
-
-//import {categories} from "../../categories";
+import {useNavigate} from "react-router-dom";
 
 
 class WelcomePage extends React.Component {
@@ -45,6 +44,7 @@ class WelcomePage extends React.Component {
     render() {
         const {categories, searchField} = this.state;
         const {isSignedIn, signOut, user} = this.props;
+        const navigate = this.props.navigate;
 
         // Filtering the categories based on the search input
         const filteredCategories = categories.filter(category => {
@@ -77,7 +77,7 @@ class WelcomePage extends React.Component {
                     <Scroll>
                         <div className='space'>
                         <div className='category-container'>
-                            <CardList categories={filteredCategories}/>
+                            <CardList categories={filteredCategories} navigate ={navigate}/>
 
                         </div>
                         </div>
@@ -88,4 +88,7 @@ class WelcomePage extends React.Component {
     }
 }
 
-export default WelcomePage;
+export default function WelcomePageWrapper(props) {
+    const navigate = useNavigate();
+    return <WelcomePage {...props} navigate={navigate}/>
+}
