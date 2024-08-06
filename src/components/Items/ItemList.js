@@ -3,6 +3,7 @@ import Item from "./Item";
 import './ItemList.css';
 
 const ItemList = ({items, criteria}) => {
+    const sortedItems = items.sort((a, b) =>b.avg_rating - a.avg_rating);
     return (
         <div>
             {

@@ -16,20 +16,24 @@ const YourListPage = ({categoryData}) => {
     const [items, setItems] = useState([]);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const fetchCategoryData = () => {
         if (categoryId) {
             fetch(`http://localhost:3000/category/${categoryId}`)
                 .then(response => response.json())
                 .then(data => {
                     setCategory(data.category.name);
                     setCriteria(data.criteria);
-                    setItems(data.items); //.map((item, index) => ({ ...item, key: `${item.id}-${index}` }))
+                    setItems(data.items);
                 })
                 .catch(err => {
                     console.error('Error fetching category data', err);
                     setError('Unable to fetch category data');
                 });
         }
+    }
+
+    useEffect(() => {
+        fetchCategoryData();
     }, [categoryId]);
 
     return (
@@ -60,7 +64,7 @@ const YourListPage = ({categoryData}) => {
                 <div className='grid-container'>
                     <ItemList items={items} criteria={criteria}/>
                 </div>
-                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}/>
+                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category} onItemAdded={fetchCategoryData} />
                 <ChooseWinButton items={items}/>
             </Scroll>
         </div>

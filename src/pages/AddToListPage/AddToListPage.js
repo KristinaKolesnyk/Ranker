@@ -42,7 +42,14 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
         })
             .then(data => {
                 console.log('Item added successfully:', data)
-                navigate('/yourlist', {state: {categoryId, categoryName: categoryData.name}})
+                navigate('/yourlist', {
+                    state: {categoryId, categoryName: categoryData.name},
+                    replace: true
+                })
+
+                if(location.state.onItemAdded){
+                    location.state.onItemAdded();
+                }
             })
             .catch(error => {
                 console.error('Error adding item:', error)
