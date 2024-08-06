@@ -7,7 +7,7 @@ import SaveButton from "../../components/Navigation/SaveButton";
 import CancelButton from "../../components/Navigation/CancelButton";
 
 
-const AddToListPage = ({categoryData, setCategoryData, user}) => {
+const AddToListPage = ({categoryData}) => {
     const location = useLocation();
     const {criteria = [], categoryId} = location.state || {criteria: [], categoryId: null};
     const navigate = useNavigate();
@@ -40,7 +40,7 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
             }
             return response.json();
         })
-            .then(data => {
+            .then(() => {
                 navigate('/yourlist', {
                     state: {categoryId, categoryName: categoryData.name},
                     replace: true

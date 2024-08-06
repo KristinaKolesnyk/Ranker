@@ -8,7 +8,7 @@ import "./YourList.css";
 import ItemList from "../../components/Items/ItemList";
 import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
-const YourListPage = ({categoryData}) => {
+const YourListPage = () => {
     const location = useLocation();
     const {categoryId, categoryName, criteria: initialCriteria =[], items: initialItems =[]} = location.state || {};
     const [category, setCategory] = useState(categoryName || '');
