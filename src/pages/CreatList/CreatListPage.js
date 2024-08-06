@@ -65,8 +65,9 @@ const CreatListPage = ({setCategoryData, user}) => {
                     }));
                     navigate('/yourlist', {
                         state: {
-                            category: category,
-                            criteria: data.criterion,
+                            categoryId: data.category.id,
+                            categoryName: data.category.name,
+                            criteria: data.criteria,
                             items: []
                         }
                     });

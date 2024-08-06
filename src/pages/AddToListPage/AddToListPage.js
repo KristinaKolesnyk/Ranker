@@ -41,7 +41,6 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
             return response.json();
         })
             .then(data => {
-                console.log('Item added successfully:', data)
                 navigate('/yourlist', {
                     state: {categoryId, categoryName: categoryData.name},
                     replace: true

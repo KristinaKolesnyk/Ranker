@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import '../CreatList/CreatList.css';
@@ -10,13 +10,12 @@ import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
 const YourListPage = ({categoryData}) => {
     const location = useLocation();
-    const {categoryId, categoryName} = location.state || {};
+    const {categoryId, categoryName, criteria: initialCriteria =[], items: initialItems =[]} = location.state || {};
     const [category, setCategory] = useState(categoryName || '');
-    const [criteria, setCriteria] = useState([]);
-    const [items, setItems] = useState([]);
-    const [error, setError] = useState(null);
+    const [criteria, setCriteria] = useState(initialCriteria);
+    const [items, setItems] = useState(initialItems);
 
-    const fetchCategoryData = () => {
+    const fetchCategoryData = useCallback(() => {
         if (categoryId) {
             fetch(`http://localhost:3000/category/${categoryId}`)
                 .then(response => response.json())
@@ -27,14 +26,15 @@ const YourListPage = ({categoryData}) => {
                 })
                 .catch(err => {
                     console.error('Error fetching category data', err);
-                    setError('Unable to fetch category data');
                 });
         }
-    }
+    }, [categoryId]);
 
     useEffect(() => {
-        fetchCategoryData();
-    }, [categoryId]);
+        if(!initialCriteria.length || !initialItems.length) {
+            fetchCategoryData();
+        }
+    }, [categoryId, fetchCategoryData, initialCriteria.length, initialItems.length]);
 
     return (
         <div className='tc'>
@@ -64,7 +64,8 @@ const YourListPage = ({categoryData}) => {
                 <div className='grid-container'>
                     <ItemList items={items} criteria={criteria}/>
                 </div>
-                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category} onItemAdded={fetchCategoryData} />
+                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
+                         onItemAdded={fetchCategoryData}/>
                 <ChooseWinButton items={items}/>
             </Scroll>
         </div>
