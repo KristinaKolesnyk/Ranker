@@ -36,6 +36,20 @@ const YourListPage = () => {
         }
     }, [categoryId, fetchCategoryData, initialCriteria.length, initialItems.length]);
 
+    const handleDeleteItem = (itemId) => {
+        fetch(`http://localhost:3000/deleteitem/${itemId}`,{
+            method: 'DELETE',
+        }).then(response =>{
+            if(!response.ok){
+                throw new Error('Failed to delete item');
+            }
+            setItems(prevItems =>  prevItems.filter(item => item.id!== itemId));
+        }).catch(error =>{
+            console.error('Error deleting item', error);
+            }
+        )
+    }
+
     return (
         <div className='tc'>
             <div className='header'>
@@ -62,7 +76,7 @@ const YourListPage = () => {
 
             <Scroll>
                 <div className='grid-container'>
-                    <ItemList items={items} criteria={criteria}/>
+                    <ItemList items={items} criteria={criteria} onDelete={handleDeleteItem}/>
                 </div>
                 <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
                          onItemAdded={fetchCategoryData}/>

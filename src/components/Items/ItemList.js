@@ -2,7 +2,7 @@ import React from 'react';
 import Item from "./Item";
 import './ItemList.css';
 
-const ItemList = ({items, criteria}) => {
+const ItemList = ({items, criteria, onDelete}) => {
     return (
         <div>
             {items
@@ -17,6 +17,7 @@ const ItemList = ({items, criteria}) => {
                                 url={item.url}
                                 avgRating={item.avg_rating}
                                 criteria={criteria}
+                                onDelete = {onDelete}
                             />
                         );
                     })}
