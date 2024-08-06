@@ -3,13 +3,13 @@ import {useNavigate, useLocation} from "react-router-dom";
 
 
 
-const AddItem = ({criteria}) => {
+const AddItem = ({criteria, categoryId, categoryName}) => {
     let navigate = useNavigate();
-    const location = useLocation();
+   // const location = useLocation();
    // const {category, criteria =[]} = location.state || {category: '', criteria: []};
 
     const handleClick = () => {
-        navigate('/addtolist', {state: {criteria}});
+        navigate('/addtolist', {state: {criteria, categoryId, categoryName}});
     }
 
     return (

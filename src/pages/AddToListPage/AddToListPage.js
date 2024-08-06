@@ -9,7 +9,7 @@ import CancelButton from "../../components/Navigation/CancelButton";
 
 const AddToListPage = ({categoryData, setCategoryData, user}) => {
     const location = useLocation();
-    const {criteria = [], category} = location.state || {criteria: [], category: null};
+    const {criteria = [], categoryId} = location.state || {criteria: [], categoryId: null};
     const navigate = useNavigate();
     const [item, setItem] = useState('');
     const [url, setUrl] = useState('');
@@ -21,64 +21,31 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
         setRating(newRatings);
     }
 
-    const calculateAverageRating = () => {
-        const numericRatings = ratings.map(r => parseFloat(r)).filter(r => !isNaN(r));
-        const sum = numericRatings.reduce((acc, val) => acc + val, 0);
-        const average = numericRatings.length > 0 ? sum / numericRatings.length : 0;
-        return parseFloat(average.toFixed(1));
-    }
-
     const handleSubmit = () => {
-        const averageRating = calculateAverageRating();
-        const criterionIds = criteria.map(c => c.id)
-        const categoryId = category;
-
-        if (!user.id) {
-            alert('Please sign in to create a list');
-            return;
+        const newItem ={
+            categoryId,
+            name: item,
+            url,
+            ratings
         }
-        console.log('Data received:',
-            '\nitemName: ' + item,
-            '\ncategoryId: ' + categoryId,
-            '\nitemUrl: ' + url,
-            '\nratingValue: ' + ratings,
-            '\navgRating: ' + averageRating,
-            '\ncriterionIds: ' + criterionIds)
-
-        fetch('http://localhost:3000/creatlist', {
+        fetch('http://localhost:3000/addtolist', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                itemName: item,
-                categoryId: categoryId,
-                itemUrl: url,
-                ratingValue: ratings,
-                avgRating: averageRating,
-                criterionIds: criterionIds
+            body: JSON.stringify(newItem)
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to add item')
+            }
+            return response.json();
+        })
+            .then(data =>{
+                console.log('Item added successfully:', data)
+                navigate('/yourlist', {state: {categoryId, categoryName: categoryData.name}})
             })
-        }).then(response => response.json())
-            .then(data => {
-                const newItem = {
-                    itemName: item,
-                    categoryId: categoryId,
-                    itemUrl: url,
-                    ratingValue: ratings,
-                    avgRating: averageRating,
-                    criterionIds: criterionIds
-                };
-                if (data) {
-                    const updatedItems = [...(categoryData.items || []), newItem];
-                    setCategoryData({
-                        ...categoryData,
-                        items: updatedItems
-                    });
-
-                    navigate('/yourlist', {state: {...categoryData, items: updatedItems}});
-                } else {
-                    alert('Incorrect credentials');
-                }
+            .catch(error =>{
+                console.error('Error adding item:', error)
             })
     }
 
@@ -124,7 +91,6 @@ const AddToListPage = ({categoryData, setCategoryData, user}) => {
                         <CancelButton/>
                     </div>
                 </div>
-
             </Scroll>
         </div>
     );

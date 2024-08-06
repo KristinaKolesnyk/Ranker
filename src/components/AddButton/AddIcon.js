@@ -18,7 +18,6 @@ const AddIcon = ({onIconUpload}) => {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     onIconUpload(data.imageUrl)
                 })
                 .catch(error => console.error('Error uploading image:', error));

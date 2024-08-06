@@ -4,11 +4,8 @@ import './Item.css';
 const Item = ({ name, criterions, url, avgRating, criteria }) => {
     const criterionValues = criteria.map(c => {
         const criterion = criterions.find(cr => cr.criterion_id === c.id);
-        console.log(criterion)
         return criterion ? criterion.value : '-';
     });
-
-
 
     return (
         <div className='grid-header grid-item'>

@@ -23,7 +23,7 @@ const YourListPage = ({ categoryData }) => {
                 .then(data => {
                     setCategory(data.category.name);
                     setCriteria(data.criteria);
-                    setItems(data.items.map((item, index) => ({ ...item, key: `${item.id}-${index}` })));
+                    setItems(data.items); //.map((item, index) => ({ ...item, key: `${item.id}-${index}` }))
                 })
                 .catch(err => {
                     console.error('Error fetching category data', err);
@@ -62,7 +62,7 @@ const YourListPage = ({ categoryData }) => {
                 <div className='grid-container'>
                     <ItemList items={items} criteria={criteria} />
                 </div>
-                <AddItem criteria={allCriteria} />
+                <AddItem criteria={allCriteria} categoryId = {categoryId} categoryName ={category} />
                 <ChooseWinButton items={items} />
             </Scroll>
         </div>

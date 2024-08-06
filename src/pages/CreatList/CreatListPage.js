@@ -36,7 +36,6 @@ const CreatListPage = ({setCategoryData, user}) => {
             return;
         }
         const criteriaNames = inputs.filter(input => input.trim() !== '');
-        console.log(iconUrl)
         fetch('http://localhost:3000/creatlist', {
             method: 'POST',
             headers: {
