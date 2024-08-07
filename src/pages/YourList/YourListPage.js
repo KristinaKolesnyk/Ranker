@@ -75,15 +75,18 @@ const YourListPage = () => {
             </div>
 
             <Scroll>
-                <div className='grid-container'>
-                    <ItemList items={items} categoryId={categoryId} categoryName={category} criteria={criteria} onDelete={handleDeleteItem}/>
+                <div className='space'>
+                    <div className='grid-container'>
+                        <ItemList items={items} categoryId={categoryId} categoryName={category} criteria={criteria}
+                                  onDelete={handleDeleteItem}/>
+                    </div>
+                    <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
+                             onItemAdded={fetchCategoryData}/>
+                    <ChooseWinButton items={items}/>
                 </div>
-                <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
-                         onItemAdded={fetchCategoryData}/>
-                <ChooseWinButton items={items}/>
             </Scroll>
         </div>
-    );
+);
 }
 
 export default YourListPage;

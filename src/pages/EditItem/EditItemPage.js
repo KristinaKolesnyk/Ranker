@@ -5,6 +5,7 @@ import Scroll from "../../components/Scroll";
 import './EditItemPage.css';
 import SaveButton from "../../components/Navigation/SaveButton";
 import CancelButton from "../../components/Navigation/CancelButton";
+import Swal from "sweetalert2";
 
 
 const EditItemPage = () => {
@@ -38,6 +39,17 @@ const EditItemPage = () => {
     }
 
     const handleSubmit = () => {
+        for (let rating of ratings) {
+            if (rating === '' || isNaN(rating) || rating < 1 || rating > 10) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Invalid rating.",
+                    text: "Please enter a number between 1 and 10 for all criteria."
+                })
+                return;
+            }
+        }
+
         const updatedItem = {
             id,
             url,
@@ -57,7 +69,6 @@ const EditItemPage = () => {
             return response.json();
         })
             .then(() => {
-                console.log('Updated item:', categoryId, categoryName)
                 navigate('/yourlist', {
                     state: {categoryId, categoryName},
                     replace: true
@@ -81,30 +92,32 @@ const EditItemPage = () => {
             </div>
 
             <Scroll>
-                {criteria.map((criterion, i) => (
-                    <input
-                        key={i}
-                        className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                        type="number" name={`rating${i}`} id={`rating${i}`}
-                        placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
-                        value={ratings[i]}
-                        onChange={(e) => handleInputChange(i, e)}
-                    />
-                ))}
+                <div className='tc box dib input-container br3 bw2 shadow-5'>
+                    {criteria.map((criterion, i) => (
+                        <input
+                            key={i}
+                            className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
+                            type="number" name={`rating${i}`} id={`rating${i}`}
+                            placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
+                            value={ratings[i]}
+                            onChange={(e) => handleInputChange(i, e)}
+                        />
+                    ))}
 
-                <input
-                    className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                    type="url" name="url" id="url" placeholder='Enter URL (optional)'
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                />
-                <div className='button-container'>
-                    <SaveButton onClick={handleSubmit}/>
-                    <CancelButton/>
+                    <input
+                        className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
+                        type="url" name="url" id="url" placeholder='Enter URL (optional)'
+                        value={url}
+                        onChange={(e) => setUrl(e.target.value)}
+                    />
+                    <div className='button-container'>
+                        <SaveButton onClick={handleSubmit}/>
+                        <CancelButton/>
+                    </div>
                 </div>
             </Scroll>
         </div>
-    );
+);
 }
 
 export default EditItemPage;

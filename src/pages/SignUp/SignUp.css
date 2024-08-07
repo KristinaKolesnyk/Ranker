@@ -1,0 +1,11 @@
+input.weak {
+    border-color: red;
+}
+
+input.medium {
+    border-color: orange;
+}
+
+input.strong {
+    border-color: green;
+}

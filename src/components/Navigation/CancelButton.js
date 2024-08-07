@@ -1,13 +1,27 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 import "./ButtonSize.css"
 
 
 const CancelButton = () => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleClick = () => {
-        navigate('/yourlist');
-        alert('You have cancelled adding an item');
+        const {categoryId, categoryName, criteria} = location.state || {};
+        Swal.fire({
+            icon: 'info',
+            title: 'Cancelled',
+            text: "You have cancelled adding/editing the item.",
+            showConfirmButton: false,
+            timer: 2000
+        }).then(() => {
+            navigate('/yourlist', {
+                state: {categoryId, categoryName, criteria},
+                replace: true,
+            });
+        })
     }
 
     return (

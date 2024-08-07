@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import ParticlesBg from 'particles-bg';
+import Swal from "sweetalert2";
 import {useNavigate} from "react-router-dom";
 import "../SignIn/SignIn.css"
+import "./SignUp.css"
 
 let config = {
     number: {
@@ -17,6 +19,7 @@ const SignUp = ({loadUser}) => {
     const [signUpEmail, setSignUpEmail] = useState('');
     const [signUpPassword, setSignUnPassword] = useState('');
     const [signUpName, setSignUpName] = useState('');
+    const [passwordStrength, setPasswordStrength] = useState('');
     let navigate = useNavigate();
 
     const onNameChange = (event) => {
@@ -27,10 +30,44 @@ const SignUp = ({loadUser}) => {
         setSignUpEmail(event.target.value);
     }
     const onPasswordChange = (event) => {
-        setSignUnPassword(event.target.value);
+        const password = event.target.value;
+        setSignUnPassword(password);
+
+        const hasNumber =/\d/;
+        const hasLetter = /[a-zA-Z]/;
+
+        if(password.length <8){
+            setPasswordStrength('weak');
+        } else if(!hasNumber.test(password) || !hasLetter.test(password)){
+            setPasswordStrength('medium');
+        } else{
+            setPasswordStrength('strong');
+        }
+
     }
 
     const onSubmitSignUp = () => {
+        if(signUpPassword.length <8){
+            Swal.fire({
+                icon: "error",
+                title: 'Weak Password',
+                text: "Password must be at least 8 characters long."
+            })
+            return;
+        }
+
+        const hasNumber =/\d/;
+        const hasLetter = /[a-zA-Z]/;
+        if(!hasNumber.test(signUpPassword) || !hasLetter.test(signUpPassword)){
+            Swal.fire({
+                icon: "error",
+                title: 'Invalid Password',
+                text: "Password must contain at least one number and one letter."
+            })
+            return;
+        }
+
+
         fetch('http://localhost:3000/signup', {
             method: 'POST',
             headers: {
@@ -43,7 +80,11 @@ const SignUp = ({loadUser}) => {
                     loadUser(user);
                     navigate('/');
                 } else {
-                    alert('Incorrect credentials');
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Sign Up Failed',
+                        text: "Please check your credentials and try again."
+                    })
                 }
             })
     }
@@ -72,7 +113,7 @@ const SignUp = ({loadUser}) => {
                             <div className="mv3">
                                 <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                                 <input onChange={onPasswordChange}
-                                    className="b pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100"
+                                    className={`b pa2 input-reset ba bg-transparent hover-bg-black-30 hover-white w-100 ${passwordStrength}`}
                                     type="password" name="password" id="password"/>
                             </div>
                         </fieldset>

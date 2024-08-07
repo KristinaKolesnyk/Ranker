@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ParticlesBg from 'particles-bg';
 import {useNavigate} from "react-router-dom";
 import "./SignIn.css"
+import Swal from "sweetalert2";
 
 let config = {
     number: {
@@ -40,7 +41,11 @@ const SignIn = ({loadUser}) => {
                     loadUser(user);
                     navigate('/');
                 } else {
-                    alert('Incorrect credentials');
+                    Swal.fire({
+                        icon: "error",
+                        title: 'Sign In Failed',
+                        text: "Please check your credentials and try again."
+                    })
                 }
             })
     }

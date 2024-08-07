@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate, useLocation} from "react-router-dom";
+import Swal from "sweetalert2";
 import HomeButton from "../../components/Navigation/HomeButton";
 import Scroll from "../../components/Scroll";
 import './AddToListPage.css';
@@ -22,6 +23,18 @@ const AddToListPage = ({categoryData}) => {
     }
 
     const handleSubmit = () => {
+        for (let rating of ratings) {
+            if (rating === '' || isNaN(rating) || rating < 1 || rating > 10) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Invalid rating.",
+                    text: "Please enter a number between 1 and 10 for all criteria."
+
+                })
+                return;
+            }
+        }
+
         const newItem = {
             categoryId,
             name: item,
@@ -46,7 +59,7 @@ const AddToListPage = ({categoryData}) => {
                     replace: true
                 })
 
-                if(location.state.onItemAdded){
+                if (location.state.onItemAdded) {
                     location.state.onItemAdded();
                 }
             })
@@ -74,14 +87,14 @@ const AddToListPage = ({categoryData}) => {
                     />
 
                     {criteria.map((criterion, i) => (
-                            <input
-                                key={i}
-                                className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
-                                type="number" name={`rating${i}`} id={`rating${i}`}
-                                placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
-                                value={ratings[i]}
-                                onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
-                            />
+                        <input
+                            key={i}
+                            className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
+                            type="number" name={`rating${i}`} id={`rating${i}`}
+                            placeholder={`Enter a rating for ${criterion.name.toLowerCase()}`}
+                            value={ratings[i]}
+                            onChange={(e) => handleInputChange(i, e)}  // Call the parent function when the input changes.
+                        />
                     ))}
 
                     <input

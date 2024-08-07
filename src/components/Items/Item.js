@@ -1,6 +1,7 @@
 import React from 'react';
 import './Item.css';
 import {useNavigate} from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categoryName, categoryId}) => {
     const criterionValues = criteria.map(c => {
@@ -11,9 +12,27 @@ const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categor
     const navigate = useNavigate();
 
     const handleDelete = () => {
-        if (window.confirm('Are you sure you want to delete this item?')) {
-            onDelete(id);
-        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to delete this item?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#5DADE2',
+            cancelButtonColor: '#EC7063',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, keep it'
+        }).then((result) =>{
+            if (result.isConfirmed) {
+                onDelete(id);
+                Swal.fire({
+                    icon:'success',
+                    title: 'Item deleted',
+                    text: "The item has been deleted successfully.",
+                    showConfirmButton: false,
+                    timer: 1600
+                })
+            }
+        })
     }
     const handleEdit = () => {
         navigate('/edititem', {
