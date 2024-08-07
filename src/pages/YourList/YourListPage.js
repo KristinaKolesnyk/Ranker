@@ -82,7 +82,7 @@ const YourListPage = () => {
                     </div>
                     <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
                              onItemAdded={fetchCategoryData}/>
-                    <ChooseWinButton items={items}/>
+                    <ChooseWinButton items={items} />
                 </div>
             </Scroll>
         </div>

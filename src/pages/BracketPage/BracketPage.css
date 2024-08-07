@@ -1,0 +1,54 @@
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.home-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+
+.bracket-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.match-container {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.competitor-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+
+.competitor-container button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.competitor-container button:hover {
+    background-color: #ddd;
+}
+
+.competitor-container button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
