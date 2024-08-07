@@ -2,7 +2,7 @@ import React from 'react';
 import Card from "./Card";
 import AddButton from "../AddButton/AddButton";
 
-const CardList = ({categories, navigate}) => {
+const CardList = ({categories, navigate, onDelete}) => {
     if(!Array.isArray(categories)){
         return <div>Error: categories is not an array</div>;
     }
@@ -17,6 +17,7 @@ const CardList = ({categories, navigate}) => {
                             name={category.name}
                             icon={category.icon}
                             navigate={navigate}
+                            onDelete = {onDelete}
                         />
                     );
                 })}

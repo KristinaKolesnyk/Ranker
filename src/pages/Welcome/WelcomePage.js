@@ -20,25 +20,48 @@ class WelcomePage extends React.Component {
     componentDidMount() {
         const {user} = this.props;
         if (user.id) {
-            fetch(`http://localhost:3000/categories/${user.id}`)
-                .then(response => response.json())
-                .then(categories => {
-                    if (Array.isArray(categories)) {
-                        this.setState({categories});
-                    } else {
-                        this.setState({error: 'Categories data is not an array'});
-                        console.error('Categories data is not an array', categories);
-                    }
-                })
-                .catch(err => {
-                    console.log('Error fetching categories', err);
-                    this.setState({error: 'Error fetching categories'})
-                })
+            this.fetchCategories(user.id);
         }
+    }
+
+    fetchCategories = (userId) => {
+        fetch(`http://localhost:3000/categories/${userId}`)
+            .then(response => response.json())
+            .then(categories => {
+                if (Array.isArray(categories)) {
+                    this.setState({categories});
+                } else {
+                    this.setState({error: 'Categories data is not an array'});
+                    console.error('Categories data is not an array', categories);
+                }
+            })
+            .catch(err => {
+                console.log('Error fetching categories', err);
+                this.setState({error: 'Error fetching categories'})
+            })
     }
 
     onSearchChange = (event) => {
         this.setState({searchField: event.target.value})
+    }
+
+    handleDeleteCategory = (id) => {
+        fetch(`http://localhost:3000/category/${id}`, {
+            method: 'DELETE',
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete category');
+            }
+            return response.json()
+        })
+            .then(() => {
+                this.setState(prevState => ({
+                    categories: prevState.categories.filter(category => category.id !== id)
+                }))
+            }).catch(err => {
+            console.error('Error deleting category', err);
+            this.setState({error: 'Error deleting'})
+        })
     }
 
     render() {
@@ -71,7 +94,7 @@ class WelcomePage extends React.Component {
                     <Scroll>
                         <div className='space'>
                             <div className='category-container'>
-                                <CardList categories={filteredCategories} navigate={navigate}/>
+                                <CardList categories={filteredCategories} navigate={navigate} onDelete ={this.handleDeleteCategory}/>
                             </div>
                         </div>
                     </Scroll>
