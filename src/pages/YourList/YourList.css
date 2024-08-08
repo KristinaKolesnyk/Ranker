@@ -1,6 +1,6 @@
 .grid-container {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .grid-header,
@@ -51,7 +51,14 @@
 .box-color{
     border: 1px solid #ccc;
     background-color: rgba(254, 245, 231, 0.4) ;
-
+}
+.winner-title {
+    color: #FFD700; /* золотой цвет */
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
 }
 .space{
     margin-bottom: 10rem;

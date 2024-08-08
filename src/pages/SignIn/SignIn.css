@@ -6,6 +6,10 @@ body{
     left: 0;
     z-index: -1;
 }
+
+.space-container{
+    margin-top: 15em;
+}
 .box-color{
     background-color: rgba(254, 245, 231, 0.85);
 }

@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
 import './BracketPage.css';
 import ParticlesBg from "particles-bg";
-import Swal from "sweetalert2";
+//import Swal from "sweetalert2";
 
 let config = {
     number: {
@@ -18,30 +18,36 @@ let config = {
 const BracketPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const {items = []} = location.state || {};
+    const {items = [], categoryId, categoryName} = location.state || {};
     const [matches, setMatches] = useState(createInitialMatches(items));
     const [currentRound, setCurrentRound] = useState(1);
     const [winner, setWinner] = useState(null);
 
     function createInitialMatches(items) {
-        if (items.length % 2 !== 0) {
-            items.push({name: 'BYE'});
-        }
-        const shuffledItems = [...items].sort(() => Math.random() - 0.5);
+        const sortedItems = [...items].sort((a, b) => b.avg_rating - a.avg_rating);
+        console.log('sortedItems: ', sortedItems)
+
+        const numOfByes = sortedItems.length - Math.pow(2, Math.floor(Math.log2(sortedItems.length)));
+
+        const byes = sortedItems.slice(0, numOfByes);
+        console.log('byes: ', byes)
+
+        const remainingTeams = sortedItems.slice(numOfByes);
+
         const matches = [];
-        for (let i = 0; i < shuffledItems.length; i += 2) {
+        for (let i = 0; i < remainingTeams.length; i += 2) {
             matches.push({
                 round: 1,
                 match: matches.length + 1,
-                competitors: [shuffledItems[i], shuffledItems[i + 1] || {name: 'BYE'}],
+                competitors: [remainingTeams[i], remainingTeams[i + 1] ? remainingTeams[i + 1] : null],
                 winner: null
             });
         }
-        return matches;
+        return {matches, byes: byes.length ? byes : []};
     }
 
     function handleMatchWinner(matchIndex, winner) {
-        const updatedMatches = [...matches];
+        const updatedMatches = [...matches.matches];
         updatedMatches[matchIndex].winner = winner;
 
         const allCurrentRoundMatchesHaveWinners = updatedMatches
@@ -52,20 +58,37 @@ const BracketPage = () => {
             ? createNextRoundMatches(updatedMatches)
             : [];
 
-        setMatches([...updatedMatches, ...nextRoundMatches]);
+        setMatches({
+            matches: [...updatedMatches, ...nextRoundMatches],
+            byes: matches.byes
+        });
 
         if (nextRoundMatches.length === 0 && allCurrentRoundMatchesHaveWinners) {
             setWinner(updatedMatches.find(m => m.round === currentRound && m.match === 1).winner);
+            fetch('http://localhost:3000/updatewinner',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({categoryId, winnerId: winner.id})
+            }).then(response => response.json())
+                .then(data => {
+                    console.log('Winner updated successfully: ', data);
+                }).catch(error => {
+                    console.error('Error updating winner', error);
+                });
         }
     }
 
     function createNextRoundMatches(matches) {
         const nextRoundMatches = [];
         const currentRoundMatches = matches.filter(m => m.round === currentRound)
+        let byesInNextRound = []
 
         for (let i = 0; i < currentRoundMatches.length; i += 2) {
             const competitor1 = currentRoundMatches[i]?.winner
             const competitor2 = currentRoundMatches[i + 1]?.winner;
+
             if (competitor1 && competitor2) {
                 nextRoundMatches.push({
                     round: currentRound + 1,
@@ -73,8 +96,30 @@ const BracketPage = () => {
                     competitors: [competitor1, competitor2],
                     winner: null
                 });
+            } else if (competitor1) {
+                byesInNextRound.push(competitor1);
+            } else if (competitor2) {
+                byesInNextRound.push(competitor2);
             }
         }
+
+        const combinedByes = [...(matches.byes || []), ...byesInNextRound]
+        console.log('\ncurrentRound: ', currentRound, '\ncombinedByes: ', combinedByes)
+        if (currentRound === 1 && (matches.byes || []).length > 0) {
+            const byeCompetitors = combinedByes.concat(nextRoundMatches.map(m => m.competitors[0]).filter(Boolean))
+            console.log('\nbyeCompetitors: ', byeCompetitors)
+            byeCompetitors.forEach((bye, index) => {
+                if (index % 2 === 1) {
+                    nextRoundMatches.push({
+                        round: currentRound + 1,
+                        match: nextRoundMatches.length + 1,
+                        competitors: [byeCompetitors[index - 1], bye],
+                        winner: null
+                    });
+                }
+            })
+        }
+
         setCurrentRound(currentRound + 1)
         return nextRoundMatches;
     }
@@ -93,34 +138,31 @@ const BracketPage = () => {
                 {winner ? (
                     <div>
                         <h2>Winner: {winner.name}</h2>
-                        <button onClick={() => navigate('/yourlist')}>Back to Your List</button>
+                        <button onClick={() => navigate('/yourlist', {
+                            state: {categoryId, categoryName}
+                        })}>Back to Your List
+                        </button>
                     </div>
                 ) : (
-                    matches
+                    matches.matches
                         .filter(m => m.round === currentRound)
                         .map((match, index) => (
                             <div key={index} className='match-container'>
                                 <h3>Round {match.round} - Match {match.match}</h3>
                                 <div className='competitor-container'>
                                     {match.competitors.map((competitor, i) => (
-                                        <button
-                                            key={i}
-                                            onClick={() => {
-                                                if (competitor.name !== 'BYE') {
-                                                    handleMatchWinner(matches.indexOf(match), competitor)
-                                                } else {
-                                                    Swal.fire({
-                                                        icon: 'info',
-                                                        title: 'Automatic Win',
-                                                        text: `Match ${match.competitors[0].name} has been won by default!`
-                                                    })
-                                                    handleMatchWinner(matches.indexOf(match), match.competitors[0])
-                                                }
-                                            }}
-                                            disabled={!!match.winner || competitor.name === 'BYE'}>
-                                            {competitor.name}
-                                        </button>
-                                    ))}
+                                        competitor && (
+                                            <button
+                                                key={i}
+                                                onClick={() => {
+                                                    if (competitor.name !== 'BYE') {
+                                                        handleMatchWinner(matches.matches.indexOf(match), competitor)
+                                                    }
+                                                }}
+                                                disabled={!!match.winner || !competitor}>
+                                                {competitor.name}
+                                            </button>
+                                        )))}
                                 </div>
                                 {match.winner && <h4>Winner: {match.winner.name}</h4>}
                             </div>

@@ -14,6 +14,7 @@ const YourListPage = () => {
     const [category, setCategory] = useState(categoryName || '');
     const [criteria, setCriteria] = useState(initialCriteria);
     const [items, setItems] = useState(initialItems);
+    const [winner, setWinner] = useState(null)
 
     const fetchCategoryData = useCallback(() => {
         if (categoryId) {
@@ -23,6 +24,7 @@ const YourListPage = () => {
                     setCategory(data.category.name);
                     setCriteria(data.criteria);
                     setItems(data.items);
+                    setWinner(data.winner);
                 })
                 .catch(err => {
                     console.error('Error fetching category data', err);
@@ -49,6 +51,8 @@ const YourListPage = () => {
             }
         )
     }
+
+
 
     return (
         <div className='tc'>
@@ -77,12 +81,13 @@ const YourListPage = () => {
             <Scroll>
                 <div className='space'>
                     <div className='grid-container'>
+                        {winner && <h2 className='winner-title'>Tournament Winner: {winner.name}</h2> }
                         <ItemList items={items} categoryId={categoryId} categoryName={category} criteria={criteria}
                                   onDelete={handleDeleteItem}/>
                     </div>
                     <AddItem criteria={criteria} categoryId={categoryId} categoryName={category}
                              onItemAdded={fetchCategoryData}/>
-                    <ChooseWinButton items={items} />
+                    <ChooseWinButton items={items} categoryId={categoryId} categoryName={category}/>
                 </div>
             </Scroll>
         </div>

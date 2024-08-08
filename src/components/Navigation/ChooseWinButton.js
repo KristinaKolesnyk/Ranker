@@ -3,10 +3,10 @@ import {useNavigate} from "react-router-dom";
 
 
 
-const ChooseWinButton = ({items}) => {
+const ChooseWinButton = ({items, categoryId, categoryName}) => {
     let navigate = useNavigate();
     const handleClick = () => {
-        navigate('/bracketpage', {state: {items }});
+        navigate('/bracketpage', {state: {items, categoryId, categoryName }});
     }
 
     return (
