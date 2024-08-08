@@ -15,6 +15,7 @@ const AddToListPage = ({categoryData}) => {
     const [item, setItem] = useState('');
     const [url, setUrl] = useState('');
     const [ratings, setRating] = useState(criteria.map(() => ''));
+    const [error, setError] = useState('')
 
     const handleInputChange = (index, event) => {
         const newRatings = [...ratings];
@@ -22,14 +23,32 @@ const AddToListPage = ({categoryData}) => {
         setRating(newRatings);
     }
 
+    const handleNameChange =(e) => {
+        const value = e.target.value;
+        if(value.length > 30){
+            setError('Name cannot exceed 30 characters.')
+        } else{
+            setError('');
+            setItem(value);
+        }
+    }
+
     const handleSubmit = () => {
+        if (error) {
+            Swal.fire({
+                icon: "warning",
+                title: "Invalid input",
+                text: error
+            });
+            return;
+        }
+
         for (let rating of ratings) {
             if (rating === '' || isNaN(rating) || rating < 1 || rating > 10) {
                 Swal.fire({
                     icon: "warning",
                     title: "Invalid rating.",
                     text: "Please enter a number between 1 and 10 for all criteria."
-
                 })
                 return;
             }
@@ -83,8 +102,8 @@ const AddToListPage = ({categoryData}) => {
                         className="br3 pa3 input-reset ba bg-transparent hover-bg-black-10 hover-white w-100"
                         type="text" name="itemName" id="itemName" placeholder='Enter name'
                         value={item}
-                        onChange={(e) => setItem(e.target.value)}  // Call the parent function when the input changes.
-                    />
+                        onChange={handleNameChange}
+                    />{error && <div style={{ color: 'red' }}>{error}</div>}
 
                     {criteria.map((criterion, i) => (
                         <input

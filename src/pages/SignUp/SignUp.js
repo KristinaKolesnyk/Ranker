@@ -45,8 +45,21 @@ const SignUp = ({loadUser}) => {
             setPasswordStrength('strong');
         }
     }
+    const isValidEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
 
     const onSubmitSignUp = () => {
+        if(!isValidEmail){
+            Swal.fire({
+                icon: "error",
+                title: 'Invalid Email',
+                text: "Please enter a valid email address."
+            })
+            return;
+        }
+
         if (signUpPassword.length < 8) {
             Swal.fire({
                 icon: "error",

@@ -1,5 +1,6 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
+import './ButtonStyle.css'
 
 
 const AddItem = ({criteria, categoryId, categoryName, onItemAdded}) => {
@@ -14,7 +15,7 @@ const AddItem = ({criteria, categoryId, categoryName, onItemAdded}) => {
     return (
         <div className="tc dib">
             <div className="bg-washed-yellow br-100 grow pa3 ma2 bw2 shadow-5">
-                <img
+                <img className='ma2'
                     onClick={handleClick}
                     alt='item' src={`/img/add.png`} width='70' height='70'/>
             </div>

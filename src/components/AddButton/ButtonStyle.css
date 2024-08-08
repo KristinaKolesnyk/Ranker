@@ -1,0 +1,65 @@
+
+
+/* delete */
+
+.circular-button {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 20px;
+    margin: 10px;
+    background: #fceabb;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #e0eafc, #fceabb);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e0eafc, #fceabb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.circular-button img {
+    width: 70px;
+    height: 70px;
+    transition: transform 0.3s ease;
+}
+
+.circular-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.circular-button:active {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.circular-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    z-index: 1;
+}
+
+.circular-button:hover::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.circular-button h2 {
+    margin-top: 10px;
+    color: #333;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.circular-button:hover h2 {
+    color: #FF5F6D;
+}

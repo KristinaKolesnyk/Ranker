@@ -104,7 +104,6 @@ const BracketPage = () => {
         }
 
         const combinedByes = [...(matches.byes || []), ...byesInNextRound]
-        console.log('\ncurrentRound: ', currentRound, '\ncombinedByes: ', combinedByes)
         if (currentRound === 1 && (matches.byes || []).length > 0) {
             const byeCompetitors = combinedByes.concat(nextRoundMatches.map(m => m.competitors[0]).filter(Boolean))
             console.log('\nbyeCompetitors: ', byeCompetitors)

@@ -3,7 +3,7 @@ import './Item.css';
 import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 
-const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categoryName, categoryId}) => {
+const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categoryName, categoryId, winnerId}) => {
     const criterionValues = criteria.map(c => {
         const criterion = criterions.find(cr => cr.criterion_id === c.id);
         return criterion ? criterion.value : '-';
@@ -29,7 +29,7 @@ const Item = ({id, name, criterions, url, avgRating, criteria, onDelete, categor
                     title: 'Item deleted',
                     text: "The item has been deleted successfully.",
                     showConfirmButton: false,
-                    timer: 1600
+                    timer: 1500
                 })
             }
         })

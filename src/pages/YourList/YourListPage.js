@@ -10,7 +10,7 @@ import ChooseWinButton from "../../components/Navigation/ChooseWinButton";
 
 const YourListPage = () => {
     const location = useLocation();
-    const {categoryId, categoryName, criteria: initialCriteria =[], items: initialItems =[]} = location.state || {};
+    const {categoryId, categoryName, criteria: initialCriteria = [], items: initialItems = []} = location.state || {};
     const [category, setCategory] = useState(categoryName || '');
     const [criteria, setCriteria] = useState(initialCriteria);
     const [items, setItems] = useState(initialItems);
@@ -33,26 +33,27 @@ const YourListPage = () => {
     }, [categoryId]);
 
     useEffect(() => {
-        if(!initialCriteria.length || !initialItems.length) {
+        if (!initialCriteria.length || !initialItems.length) {
             fetchCategoryData();
         }
     }, [categoryId, fetchCategoryData, initialCriteria.length, initialItems.length]);
 
     const handleDeleteItem = (itemId) => {
-        fetch(`http://localhost:3000/deleteitem/${itemId}`,{
+        fetch(`http://localhost:3000/deleteitem/${itemId}`, {
             method: 'DELETE',
-        }).then(response =>{
-            if(!response.ok){
+        }).then(response => {
+            if (!response.ok) {
                 throw new Error('Failed to delete item');
             }
-            setItems(prevItems =>  prevItems.filter(item => item.id!== itemId));
-        }).catch(error =>{
-            console.error('Error deleting item', error);
+            setItems(prevItems => prevItems.filter(item => item.id !== itemId));
+            if (winner && winner.id === itemId) {
+                setWinner(null);
+            }
+        }).catch(error => {
+                console.error('Error deleting item', error);
             }
         )
     }
-
-
 
     return (
         <div className='tc'>
@@ -81,7 +82,9 @@ const YourListPage = () => {
             <Scroll>
                 <div className='space'>
                     <div className='grid-container'>
-                        {winner && <h2 className='winner-title'>Tournament Winner: {winner.name}</h2> }
+                        <div className='center-container'>
+                            {winner && <h2 className='winner-title'>Tournament Winner: {winner.name}</h2>}
+                        </div>
                         <ItemList items={items} categoryId={categoryId} categoryName={category} criteria={criteria}
                                   onDelete={handleDeleteItem}/>
                     </div>
@@ -91,7 +94,7 @@ const YourListPage = () => {
                 </div>
             </Scroll>
         </div>
-);
+    );
 }
 
 export default YourListPage;
