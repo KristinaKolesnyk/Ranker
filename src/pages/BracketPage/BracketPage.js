@@ -1,175 +1,199 @@
-import React, {useState} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
-import HomeButton from "../../components/Navigation/HomeButton";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import HomeButton from '../../components/Navigation/HomeButton';
 import './BracketPage.css';
-import ParticlesBg from "particles-bg";
-//import Swal from "sweetalert2";
+import ParticlesBg from 'particles-bg';
 
-let config = {
+const config = {
     number: {
         value: 30,
         density: {
             enable: true,
-            value_area: 800
-        }
-    }
+            value_area: 800,
+        },
+    },
 };
 
 const BracketPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const {items = [], categoryId, categoryName} = location.state || {};
-    const [matches, setMatches] = useState(createInitialMatches(items));
+    const { items = [], categoryId, categoryName } = location.state || {};
+    const [matches, setMatches] = useState([]);
     const [currentRound, setCurrentRound] = useState(1);
     const [winner, setWinner] = useState(null);
 
-    function createInitialMatches(items) {
-        const sortedItems = [...items].sort((a, b) => b.avg_rating - a.avg_rating);
-        console.log('sortedItems: ', sortedItems)
-
-        const numOfByes = sortedItems.length - Math.pow(2, Math.floor(Math.log2(sortedItems.length)));
-
-        const byes = sortedItems.slice(0, numOfByes);
-        console.log('byes: ', byes)
-
-        const remainingTeams = sortedItems.slice(numOfByes);
-
+    // Создание начальных матчей
+    const createInitialMatches = useCallback((competitors) => {
         const matches = [];
-        for (let i = 0; i < remainingTeams.length; i += 2) {
-            matches.push({
-                round: 1,
-                match: matches.length + 1,
-                competitors: [remainingTeams[i], remainingTeams[i + 1] ? remainingTeams[i + 1] : null],
-                winner: null
-            });
-        }
-        return {matches, byes: byes.length ? byes : []};
-    }
-
-    function handleMatchWinner(matchIndex, winner) {
-        const updatedMatches = [...matches.matches];
-        updatedMatches[matchIndex].winner = winner;
-
-        const allCurrentRoundMatchesHaveWinners = updatedMatches
-            .filter(m => m.round === currentRound)
-            .every(m => m.winner !== null)
-
-        const nextRoundMatches = allCurrentRoundMatchesHaveWinners
-            ? createNextRoundMatches(updatedMatches)
-            : [];
-
-        setMatches({
-            matches: [...updatedMatches, ...nextRoundMatches],
-            byes: matches.byes
-        });
-
-        if (nextRoundMatches.length === 0 && allCurrentRoundMatchesHaveWinners) {
-            setWinner(updatedMatches.find(m => m.round === currentRound && m.match === 1).winner);
-            fetch('http://localhost:3000/updatewinner',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({categoryId, winnerId: winner.id})
-            }).then(response => response.json())
-                .then(data => {
-                    console.log('Winner updated successfully: ', data);
-                }).catch(error => {
-                    console.error('Error updating winner', error);
+        for (let i = 0; i < competitors.length; i += 2) {
+            if (i + 1 < competitors.length) {
+                matches.push({
+                    round: 1,
+                    match: matches.length + 1,
+                    competitors: [competitors[i], competitors[i + 1]],
+                    winner: null,
                 });
+            } else {
+                // Один участник получает бай
+                matches.push({
+                    round: 1,
+                    match: matches.length + 1,
+                    competitors: [competitors[i]],
+                    winner: competitors[i],
+                });
+            }
         }
-    }
+        return matches;
+    }, []);
 
-    function createNextRoundMatches(matches) {
+    // Создание матчей следующего раунда
+    const createNextRoundMatches = useCallback((matches) => {
         const nextRoundMatches = [];
-        const currentRoundMatches = matches.filter(m => m.round === currentRound)
-        let byesInNextRound = []
+        const winners = matches
+            .filter(m => m.winner !== null)
+            .map(m => m.winner);
 
-        for (let i = 0; i < currentRoundMatches.length; i += 2) {
-            const competitor1 = currentRoundMatches[i]?.winner
-            const competitor2 = currentRoundMatches[i + 1]?.winner;
-
-            if (competitor1 && competitor2) {
+        for (let i = 0; i < winners.length; i += 2) {
+            if (i + 1 < winners.length) {
                 nextRoundMatches.push({
                     round: currentRound + 1,
                     match: nextRoundMatches.length + 1,
-                    competitors: [competitor1, competitor2],
-                    winner: null
+                    competitors: [winners[i], winners[i + 1]],
+                    winner: null,
                 });
-            } else if (competitor1) {
-                byesInNextRound.push(competitor1);
-            } else if (competitor2) {
-                byesInNextRound.push(competitor2);
+            } else {
+                // Один участник получает бай
+                nextRoundMatches.push({
+                    round: currentRound + 1,
+                    match: nextRoundMatches.length + 1,
+                    competitors: [winners[i]],
+                    winner: winners[i],
+                });
             }
         }
 
-        const combinedByes = [...(matches.byes || []), ...byesInNextRound]
-        if (currentRound === 1 && (matches.byes || []).length > 0) {
-            const byeCompetitors = combinedByes.concat(nextRoundMatches.map(m => m.competitors[0]).filter(Boolean))
-            console.log('\nbyeCompetitors: ', byeCompetitors)
-            byeCompetitors.forEach((bye, index) => {
-                if (index % 2 === 1) {
-                    nextRoundMatches.push({
-                        round: currentRound + 1,
-                        match: nextRoundMatches.length + 1,
-                        competitors: [byeCompetitors[index - 1], bye],
-                        winner: null
+        return nextRoundMatches;
+    }, [currentRound]);
+
+    // Обработка победителя матча
+    const handleMatchWinner = useCallback((matchIndex, winner) => {
+        const updatedMatches = [...matches];
+        updatedMatches[matchIndex].winner = winner;
+
+        const currentRoundMatches = updatedMatches.filter(m => m.round === currentRound);
+        const allCurrentRoundMatchesHaveWinners = currentRoundMatches.every(m => m.winner !== null);
+
+        if (allCurrentRoundMatchesHaveWinners) {
+            const nextRoundMatches = createNextRoundMatches(updatedMatches);
+            if (nextRoundMatches.length === 0) {
+                // Финалист найден, установка победителя
+                const finalWinner = updatedMatches.find(m => m.round === currentRound && m.match === 1)?.winner;
+                setWinner(finalWinner);
+
+                if (finalWinner) {
+                    fetch('http://localhost:3000/updatewinner', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ categoryId, winnerId: finalWinner.id }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Winner updated successfully: ', data);
+                    })
+                    .catch(error => {
+                        console.error('Error updating winner:', error);
                     });
                 }
-            })
+            } else {
+                setMatches(updatedMatches.concat(nextRoundMatches));
+                setCurrentRound(currentRound + 1);
+            }
+        }
+    }, [matches, currentRound, createNextRoundMatches, categoryId]);
+
+    useEffect(() => {
+        if (items.length) {
+            const sortedItems = [...items].sort((a, b) => b.avg_rating - a.avg_rating);
+            setMatches(createInitialMatches(sortedItems));
+        }
+    }, [items, createInitialMatches]);
+
+    // Функция для рендеринга одного матча
+    const renderMatch = (match, index) => (
+        <div key={index} className="match-container">
+            <h4>Match {match.match}</h4>
+            <div className="competitor-container">
+                {match.competitors.map((competitor, i) => (
+                    <button
+                        key={i}
+                        onClick={() => {
+                            if (!match.winner) {
+                                const matchIndex = matches.indexOf(match);
+                                handleMatchWinner(matchIndex, competitor);
+                            }
+                        }}
+                        disabled={!!match.winner}
+                    >
+                        {competitor.name}
+                    </button>
+                ))}
+            </div>
+            {match.winner && <h5>Winner: {match.winner.name}</h5>}
+        </div>
+    );
+
+    // Функция для рендеринга всех раундов
+    const renderBracket = () => {
+        let roundMatches = matches.filter(m => m.round === 1);
+        const rounds = [];
+
+        while (roundMatches.length > 0) {
+            rounds.push(
+                <div key={roundMatches[0].round} className="round">
+                    <h3>Round {roundMatches[0].round}</h3>
+                    {roundMatches.map((match, index) => renderMatch(match, index))}
+                </div>
+            );
+
+            // Переход к следующему раунду
+            roundMatches = matches.filter(m => m.round === roundMatches[0].round + 1);
         }
 
-        setCurrentRound(currentRound + 1)
-        return nextRoundMatches;
-    }
+        return rounds;
+    };
 
     return (
-        <div className='tc'>
-            <ParticlesBg type='square' config={config} bg={true}/>
-            <div className='header'>
-                <div className='home-button'>
-                    <HomeButton/>
+        <div className="tc">
+            <ParticlesBg type="square" config={config} bg={true} />
+            <div className="header">
+                <div className="home-button">
+                    <HomeButton />
                 </div>
-                <h1 className='title f1 washed-yellow bold'>Bracket Tournament</h1>
+                <h1 className="title f1 washed-yellow bold">Bracket Tournament</h1>
             </div>
 
-            <div className='bracket-container'>
+            <div className="bracket-container">
                 {winner ? (
                     <div>
                         <h2>Winner: {winner.name}</h2>
-                        <button onClick={() => navigate('/yourlist', {
-                            state: {categoryId, categoryName}
-                        })}>Back to Your List
+                        <button
+                            onClick={() =>
+                                navigate('/yourlist', {
+                                    state: { categoryId, categoryName },
+                                })
+                            }
+                        >
+                            Back to Your List
                         </button>
                     </div>
                 ) : (
-                    matches.matches
-                        .filter(m => m.round === currentRound)
-                        .map((match, index) => (
-                            <div key={index} className='match-container'>
-                                <h3>Round {match.round} - Match {match.match}</h3>
-                                <div className='competitor-container'>
-                                    {match.competitors.map((competitor, i) => (
-                                        competitor && (
-                                            <button
-                                                key={i}
-                                                onClick={() => {
-                                                    if (competitor.name !== 'BYE') {
-                                                        handleMatchWinner(matches.matches.indexOf(match), competitor)
-                                                    }
-                                                }}
-                                                disabled={!!match.winner || !competitor}>
-                                                {competitor.name}
-                                            </button>
-                                        )))}
-                                </div>
-                                {match.winner && <h4>Winner: {match.winner.name}</h4>}
-                            </div>
-                        ))
+                    renderBracket()
                 )}
             </div>
-        </div>);
-}
+        </div>
+    );
+};
 
 export default BracketPage;
-
