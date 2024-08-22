@@ -6,6 +6,12 @@ body{
     left: 0;
     z-index: -1;
 }
+.home-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
 
 .space-container{
     margin-top: 15em;

@@ -6,7 +6,6 @@ import Scroll from '../../components/Scroll';
 import CardList from '../../components/Cards/CardList';
 import {useNavigate} from "react-router-dom";
 
-
 class WelcomePage extends React.Component {
     constructor() {
         super();
@@ -37,7 +36,7 @@ class WelcomePage extends React.Component {
             })
             .catch(err => {
                 console.log('Error fetching categories', err);
-                this.setState({error: 'Error fetching categories'})
+                this.setState({error: 'Error fetching categories'});
             })
     }
 
@@ -60,7 +59,7 @@ class WelcomePage extends React.Component {
                 }))
             }).catch(err => {
             console.error('Error deleting category', err);
-            this.setState({error: 'Error deleting'})
+            this.setState({error: 'Error deleting'});
         })
     }
 
@@ -71,34 +70,79 @@ class WelcomePage extends React.Component {
 
         const filteredCategories = categories.filter(category => {
             return category.name.toLowerCase().includes(searchField.toLowerCase());
-        })
+        });
 
         return (
             <div className='WelcomePage'>
-                <div className='header-text'>
-                    <h1 className='f-headline washed-yellow '>The Ranker</h1>
+                <header className='header-text'>
+                    <h1 className='f-headline washed-yellow'>The Ranker</h1>
                     <Navigation isSignedIn={isSignedIn} signOut={signOut}/>
-                </div>
+                </header>
 
-                <div className='header-text'>
-                    {user.name ?
-                        <h2 className='washed-yellow'>{user.name}, We Make Decisions Easy for You</h2>
-                        : <h2 className='washed-yellow'>Where Decisions Become Easy</h2>
-                    }
-                </div>
-
-                <div className='tc'><h1>Categories</h1></div>
-
-                <div className='tc'>
-                    <div><SearchBox searchChange={this.onSearchChange}/></div>
-                    <Scroll>
-                        <div className='space'>
-                            <div className='category-container'>
-                                <CardList categories={filteredCategories} navigate={navigate} onDelete ={this.handleDeleteCategory}/>
+                <section className='intro-section'>
+                    {isSignedIn && user.id ? (
+                        <>
+                            <div className='pad-left'>
+                                <h2 className='washed-yellow'>{user.name}, We Make Decision Making Easy for You</h2>
                             </div>
+                            <div className='tc'>
+                                <h1>Categories</h1>
+                                <div>
+                                    <SearchBox searchChange={this.onSearchChange}/>
+                                </div>
+                                <Scroll>
+                                    <div className='space'>
+                                        <div className='category-container'>
+                                            <CardList
+                                                categories={filteredCategories}
+                                                navigate={navigate}
+                                                onDelete={this.handleDeleteCategory}
+                                            />
+                                        </div>
+                                    </div>
+                                </Scroll>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                        <div className='pad-left'>
+                            <h2 className='washed-yellow'>Where Decisions Become Easy</h2>
+                            <p className='intro-text'>
+                                Join us to create and rank lists, making choices easier in all aspects of life.
+                            </p>
                         </div>
-                    </Scroll>
-                </div>
+                            <section className='features-section'>
+                                <div className='pad-left'>
+                                    <h3 className='features-title'>Site Features</h3>
+                                </div>
+                                    <div className='features-list'>
+                                        <div className='feature-item'>
+                                            <h4>Create Lists</h4>
+                                            <p>Create personalized lists for any occasion — from groceries to life
+                                                priorities.</p>
+                                        </div>
+                                        <div className='feature-item'>
+                                            <h4>Rate and Rank</h4>
+                                            <p>Compare options and help others make the right choice.</p>
+                                        </div>
+                                        <div className='feature-item'>
+                                            <h4>Share Your Lists</h4>
+                                            <p>Share your lists with friends and family, or make them public for
+                                                everyone.</p>
+                                        </div>
+                                        <div className='feature-item'>
+                                            <h4>Join Communities</h4>
+                                            <p>Join themed communities and find like-minded individuals.</p>
+                                        </div>
+                                    </div>
+                            </section>
+                        </>
+                        )}
+                        </section>
+
+                <footer className='footer'>
+                    <p>© 2024 The Ranker. All rights reserved.</p>
+                </footer>
             </div>
         );
     }
@@ -106,5 +150,5 @@ class WelcomePage extends React.Component {
 
 export default function WelcomePageWrapper(props) {
     const navigate = useNavigate();
-    return <WelcomePage {...props} navigate={navigate}/>
+    return <WelcomePage {...props} navigate={navigate}/>;
 }

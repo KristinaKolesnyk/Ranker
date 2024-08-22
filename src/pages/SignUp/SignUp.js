@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ParticlesBg from 'particles-bg';
 import Swal from "sweetalert2";
 import {useNavigate} from "react-router-dom";
+import HomeButton from "../../components/Navigation/HomeButton";
 import "../SignIn/SignIn.css"
 import "./SignUp.css"
 
@@ -104,6 +105,9 @@ const SignUp = ({loadUser}) => {
     return (
         <div>
             <ParticlesBg className="config" type="cobweb" config={config} bg={true}/>
+            <div className='home-button'>
+                <HomeButton/>
+            </div>
             <div className="space-container">
                 <article className="tc br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center"
                          style={{backgroundColor: '#FEF5E7D8'}}>
