@@ -66,42 +66,42 @@ const CreatListPage = ({setCategoryData, user}) => {
                 iconUrl: iconUrl
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Received data:', data); // Для отладки
-            if (data && data.category && data.criteria) {
-                setCategoryData(prevData => ({
-                    ...prevData,
-                    [category]: {
-                        id: data.category.id,
-                        name: category,
-                        criteria: data.criteria.map(criterion => ({
-                            id: criterion.id,
-                            name: criterion.name
-                        })),
-                        items: []
-                    }
-                }));
-                navigate('/yourlist', {
-                    state: {
-                        categoryId: data.category.id,
-                        categoryName: data.category.name,
-                        criteria: data.criteria,
-                        items: []
-                    }
-                });
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Failed to Create List',
-                    text: 'There was an issue creating your list. Please ensure all fields are filled out correctly, including the category name, criteria, and icon , then try again.'
-                });
-            }
-        })
-        .catch(err => {
-            console.error('Error creating list:', err);
-            alert('An error occurred while creating the list. Please try again.');
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Received data:', data); // Для отладки
+                if (data && data.category && data.criteria) {
+                    setCategoryData(prevData => ({
+                        ...prevData,
+                        [category]: {
+                            id: data.category.id,
+                            name: category,
+                            criteria: data.criteria.map(criterion => ({
+                                id: criterion.id,
+                                name: criterion.name
+                            })),
+                            items: []
+                        }
+                    }));
+                    navigate('/yourlist', {
+                        state: {
+                            categoryId: data.category.id,
+                            categoryName: data.category.name,
+                            criteria: data.criteria,
+                            items: []
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Failed to Create List',
+                        text: 'There was an issue creating your list. Please ensure all fields are filled out correctly, including the category name, criteria, and icon , then try again.'
+                    });
+                }
+            })
+            .catch(err => {
+                console.error('Error creating list:', err);
+                alert('An error occurred while creating the list. Please try again.');
+            });
     };
 
     return (

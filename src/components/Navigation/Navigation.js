@@ -4,7 +4,7 @@ import "./ButtonSize.css";
 
 const Navigation = ({isSignedIn, signOut}) => {
     let navigate = useNavigate();
-
+//checking git
     const handleSignOut = () => {
         signOut();
         navigate('/');

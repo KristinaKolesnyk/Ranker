@@ -18,37 +18,84 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 .match-container {
     margin: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    width: 300px;
+    padding: 20px;
+    border: 2px solid #edd3ed;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 600px;
     text-align: center;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .competitor-container {
     display: flex;
-    justify-content: space-around;
-    margin: 10px 0;
+    justify-content: space-between;
+    margin: 20px 0;
 }
 
 .competitor-container button {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    padding: 10px;
+    background: #C6FFDD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: #030303;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.competitor-container button:hover {
+    background-color: #edd3ed;
+    transform: scale(1.05);
+}
+
+.competitor-container button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+
+.bye {
+    display: none;
+}
+.winner-section {
+    margin-top: 2rem;
+    padding: 20px;
+    border: 2px solid #edd3ed;
+    border-radius: 10px;
+    background-color: #f0f6f5;
+    color: #070707;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.winner-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.winner-section button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    background-color: #edd3ed;
+    color: #342833;
+    border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.competitor-container button:hover {
+.winner-section button:hover {
     background-color: #ddd;
-}
-
-.competitor-container button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
 }
