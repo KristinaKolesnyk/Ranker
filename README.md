@@ -1,7 +1,3 @@
-### Frontend (React) README
-
----
-
 # Ranker Frontend
 
 Ranker is a web application that allows users to create lists, compare items, and organize tournaments to determine the best item. The frontend is built using **React** for creating dynamic and responsive user interfaces.
@@ -10,11 +6,9 @@ Ranker is a web application that allows users to create lists, compare items, an
 
 - [Features](#features)
 - [Installation](#installation)
-- [Available Scripts](#available-scripts)
 - [Technologies](#technologies)
 - [Project Structure](#project-structure)
 - [Screenshots & Videos](#screenshots--videos)
-- [Contributing](#contributing)
 
 ## Features
 
@@ -22,20 +16,19 @@ Ranker is a web application that allows users to create lists, compare items, an
 - **Compare items**: The app allows users to compare items based on specific criteria.
 - **Tournament system**: Users can set up tournaments where items compete in rounds until a winner is determined.
 - **Real-time updates**: Changes are reflected dynamically without requiring page reloads.
-- **Responsive design**: The UI is optimized for both desktop and mobile devices.
 
 ## Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/ranker-frontend.git
+   git clone https://github.com/KristinaKolesnyk/Ranker.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd ranker-frontend
+   cd ranker
    ```
 
 3. Install the required dependencies:
@@ -51,15 +44,6 @@ Ranker is a web application that allows users to create lists, compare items, an
    ```
 
    The app will be available at `http://localhost:3000`.
-
-## Available Scripts
-
-In the project directory, you can run:
-
-- **`npm start`**: Runs the app in development mode at `http://localhost:3000`. The page reloads automatically when you make changes.
-- **`npm test`**: Launches the test runner in the interactive watch mode.
-- **`npm run build`**: Builds the app for production, bundling the files for deployment.
-- **`npm run eject`**: Ejects the app, giving full control over the configuration.
 
 ## Technologies
 
@@ -86,8 +70,3 @@ In the project directory, you can run:
 
 A folder called **`/screenshots`** has been added to the project root. It contains several images and videos demonstrating the user interface and the tournament system functionality of the Ranker application.
 
-## Contributing
-
-If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.
-
----
