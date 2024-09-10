@@ -68,5 +68,9 @@ Ranker is a web application that allows users to create lists, compare items, an
 
 ## Screenshots & Videos
 
-A folder called **`/screenshots`** has been added to the project root. It contains several images and videos demonstrating the user interface and the tournament system functionality of the Ranker application.
+A folder called **`/screenshots`** contains demo screenshots of the application.
+
+- **Demo Video**: You can watch the demo video on [Google Drive](https://drive.google.com/file/d/1VphzLdFyHtjBdn0MP5WybtCAW-bC7GQY/view?usp=sharing).
+
+
 
