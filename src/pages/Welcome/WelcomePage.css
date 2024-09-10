@@ -1,6 +1,17 @@
-body{
-    margin: 0px;
-    padding: 0px;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
 }
 
 .category-container {
@@ -57,7 +68,7 @@ body{
 
 .features-title {
     font-size: 1.5rem;
-    color: #f0e68c;
+    color: #333;
     margin-bottom: 1rem;
 }
 
@@ -66,12 +77,17 @@ body{
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.pad-left{
+    padding-left: 60px;
+}
 
 .feature-item {
     width: 45%;
     margin-bottom: 2rem;
-    background-color: #282c34;
-    color: white;
+    background: #FFEFBA;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #333;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -80,17 +96,17 @@ body{
 
 .feature-item h4 {
     margin-top: 0;
-    color: #f0e68c;
-}
-.pad-left{
-    padding-left: 60px;
+    color: #333;
 }
 
 .footer {
+    background: #FFEFBA;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #333;
     text-align: center;
-    padding: 1rem;
-    background-color: #333;
-    color: #f0e68c;
+    padding: 10px 0;
+    position: relative;
 }
 .intro-section {
     text-align: left;
@@ -99,7 +115,7 @@ body{
 
 .intro-text {
     font-size: 1.2rem;
-    color: #f0e68c;
+    color: #333;
     margin-top: 1rem;
     margin-bottom: 2rem;
 }

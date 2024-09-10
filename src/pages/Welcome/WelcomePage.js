@@ -73,72 +73,82 @@ class WelcomePage extends React.Component {
         });
 
         return (
-            <div className='WelcomePage'>
+            <div className='app-container'>
                 <header className='header-text'>
                     <h1 className='f-headline washed-yellow'>The Ranker</h1>
                     <Navigation isSignedIn={isSignedIn} signOut={signOut}/>
                 </header>
 
-                <section className='intro-section'>
-                    {isSignedIn && user.id ? (
-                        <>
-                            <div className='pad-left'>
-                                <h2 className='washed-yellow'>{user.name}, We Make Decision Making Easy for You</h2>
-                            </div>
-                            <div className='tc'>
-                                <h1>Categories</h1>
-                                <div>
-                                    <SearchBox searchChange={this.onSearchChange}/>
-                                </div>
-                                <Scroll>
-                                    <div className='space'>
-                                        <div className='category-container'>
-                                            <CardList
-                                                categories={filteredCategories}
-                                                navigate={navigate}
-                                                onDelete={this.handleDeleteCategory}
-                                            />
-                                        </div>
-                                    </div>
-                                </Scroll>
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                        <div className='pad-left'>
-                            <h2 className='washed-yellow'>Where Decisions Become Easy</h2>
-                            <p className='intro-text'>
-                                Join us to create and rank lists, making choices easier in all aspects of life.
-                            </p>
-                        </div>
-                            <section className='features-section'>
+                <main className='main-content'>
+                    <section className='intro-section'>
+                        {isSignedIn && user.id ? (
+                            <>
                                 <div className='pad-left'>
-                                    <h3 className='features-title'>Site Features</h3>
+                                    <h2 className='washed-yellow'>{user.name}, We Make Decision Making Easy for You</h2>
                                 </div>
+                                <div className='tc'>
+                                    <h1>Categories</h1>
+                                    <div>
+                                        <SearchBox searchChange={this.onSearchChange}/>
+                                    </div>
+                                    <Scroll>
+                                        <div className='space'>
+                                            <div className='category-container'>
+                                                <CardList
+                                                    categories={filteredCategories}
+                                                    navigate={navigate}
+                                                    onDelete={this.handleDeleteCategory}
+                                                />
+                                            </div>
+                                        </div>
+                                    </Scroll>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className='pad-left'>
+                                    <h2 className='washed-yellow'>Where Decisions Become Easy</h2>
+                                    <p className='intro-text'>
+                                        Join us to create and rank lists, making choices easier in all aspects of life.
+                                    </p>
+                                </div>
+                                <section className='features-section'>
+                                    <div className='tc'>
+                                        <h1 className='features-title'>Site Features</h1>
+                                    </div>
+
                                     <div className='features-list'>
                                         <div className='feature-item'>
-                                            <h4>Create Lists</h4>
-                                            <p>Create personalized lists for any occasion — from groceries to life
-                                                priorities.</p>
+                                            <h4 className='f3'>Create Personalized Lists</h4>
+                                            <p>Effortlessly create customized lists for anything that matters to you —
+                                                from your favorite movies and must-read books to daily to-do’s and more.
+                                                Ranker helps you organize your thoughts and priorities with ease.</p>
                                         </div>
                                         <div className='feature-item'>
-                                            <h4>Rate and Rank</h4>
-                                            <p>Compare options and help others make the right choice.</p>
+                                            <h4 className='f3'>Compete in Interactive Tournaments</h4>
+                                            <p>Have fun while making decisions! Use our interactive tournaments to
+                                                compare your items head-to-head and let Ranker guide you to the best
+                                                choice, all through an engaging and dynamic experience.</p>
                                         </div>
                                         <div className='feature-item'>
-                                            <h4>Share Your Lists</h4>
-                                            <p>Share your lists with friends and family, or make them public for
-                                                everyone.</p>
+                                            <h4 className='f3'>Rank Items with Smart Algorithms</h4>
+                                            <p>Rank your items based on criteria that matter to you. Our smart ranking
+                                                algorithms give you insightful, data-driven rankings that reflect your
+                                                preferences and help you see your top choices more clearly.</p>
                                         </div>
                                         <div className='feature-item'>
-                                            <h4>Join Communities</h4>
-                                            <p>Join themed communities and find like-minded individuals.</p>
+                                            <h4 className='f3'>Smooth and Enjoyable Experience</h4>
+                                            <p>From start to finish, Ranker provides a seamless and intuitive
+                                                experience. Whether you’re ranking for fun or making important
+                                                decisions, our user-friendly design ensures that your time on the
+                                                platform is enjoyable and productive.</p>
                                         </div>
                                     </div>
-                            </section>
-                        </>
+                                </section>
+                            </>
                         )}
-                        </section>
+                    </section>
+                </main>
 
                 <footer className='footer'>
                     <p>© 2024 The Ranker. All rights reserved.</p>
@@ -152,3 +162,4 @@ export default function WelcomePageWrapper(props) {
     const navigate = useNavigate();
     return <WelcomePage {...props} navigate={navigate}/>;
 }
+

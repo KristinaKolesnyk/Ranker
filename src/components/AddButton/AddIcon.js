@@ -9,7 +9,6 @@ const AddIcon = ({onIconUpload}) => {
         if (file) {
             setImage(URL.createObjectURL(file));
             setImageName('Your Icon');
-            // Загрузите изображение на сервер здесь
             const formData = new FormData();
             formData.append('file', file);
             fetch('http://localhost:3000/upload', {

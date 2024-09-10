@@ -14,21 +14,21 @@ html, body {
 }
 
 .input-container {
-    width: 50%; /* Устанавливаем фиксированную ширину контейнера */
-    max-width: 600px; /* Максимальная ширина контейнера */
-    margin: 0 auto; /* Центрируем контейнер */
+    width: 50%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 input[type="text"],[type="url"],[type="number"] {
-    width: 100%; /* Ширина поля ввода всегда 100% от контейнера */
-    box-sizing: border-box; /* Включаем padding и border в общую ширину и высоту элемента */
+    width: 100%;
+    box-sizing: border-box;
     margin: 10px;
 }
 .button-container {
     display: flex;
     justify-content: center;
     gap: 1rem; /* Space between buttons */
-    margin-top: 1rem; /* Margin above the button container */
+    margin-top: 1rem;
 }
 
 .header {

@@ -9,6 +9,6 @@
 .criteria {
     display: flex;
     flex-wrap: nowrap;
-    gap: 20px; /* Расстояние между критериями, можно настроить по своему усмотрению */
+    gap: 20px;
 }
 
