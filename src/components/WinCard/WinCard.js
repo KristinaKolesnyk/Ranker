@@ -1,9 +1,6 @@
 import React from 'react';
 import './WinCard.css';
 
-
-
-
 const WinCard = () => {
     return (
         <div className=' dib bg-washed-yellow br3 grow pa2 bw2 shadow-5 wincard'>
@@ -14,6 +11,3 @@ const WinCard = () => {
 }
 
 export default WinCard;
-
-
-//`https://robohash.org/${id}?200x200`
