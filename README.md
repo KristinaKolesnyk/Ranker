@@ -1,15 +1,6 @@
 # Ranker Frontend
 
 The **Ranker** platform is a decision-making web application that allows users to create and rank items in various categories through interactive lists and tournaments. The frontend is developed using **React** to offer a dynamic and responsive user experience. It is designed to provide users with a seamless interface for creating, managing, and ranking items across diverse domains like movies, books, or even personal choices.
-
-## Table of Contents
-
-- [Uniqueness](#uniqueness)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Screenshots & Videos](#screenshots--videos)
-- [Installation](#installation)
-- [Acknowledgements](#acknowledgements)
   
 ## Uniqueness
 **Ranker** stands out due to its **gamification of the decision-making process**. Instead of simply allowing users to rank items in a list, Ranker introduces a competitive edge through tournament-style comparisons, turning a routine decision-making process into an interactive, engaging, and enjoyable experience. This gamified ranking system helps users make thoughtful decisions while having fun.
