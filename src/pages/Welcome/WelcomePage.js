@@ -162,3 +162,4 @@ export default function WelcomePageWrapper(props) {
     const navigate = useNavigate();
     return <WelcomePage {...props} navigate={navigate}/>;
 }
+

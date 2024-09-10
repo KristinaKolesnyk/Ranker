@@ -1,70 +1,72 @@
-# Getting Started with Create React WelcomePage
+# Ranker Frontend
 
-This project was bootstrapped with [Create React WelcomePage](https://github.com/facebook/create-react-app).
+Ranker is a web application that allows users to create lists, compare items, and organize tournaments to determine the best item. The frontend is built using **React** for creating dynamic and responsive user interfaces.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Installation](#installation)
+- [Technologies](#technologies)
+- [Project Structure](#project-structure)
+- [Screenshots & Videos](#screenshots--videos)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Create and manage lists**: Users can create and organize lists of items across different categories.
+- **Compare items**: The app allows users to compare items based on specific criteria.
+- **Tournament system**: Users can set up tournaments where items compete in rounds until a winner is determined.
+- **Real-time updates**: Changes are reflected dynamically without requiring page reloads.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone https://github.com/KristinaKolesnyk/Ranker.git
+   ```
 
-### `npm run build`
+2. Navigate to the project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   cd ranker
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install the required dependencies:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+4. Start the development server:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   ```bash
+   npm start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   The app will be available at `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Technologies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **React**: The main library for building the frontend.
+- **React Router DOM**: Handles navigation between pages.
+- **SweetAlert2**: Provides elegant alerts and popups.
+- **Particles-bg**: Adds background effects to enhance the visual experience.
+- **Tachyons**: A functional CSS framework for styling.
+- **PostgreSQL**: Integration for data storage (via API).
+- **Node.js & Express**: Backend REST API for data fetching and updates.
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React WelcomePage documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+/src
+  /components   # Reusable UI components
+  /pages        # Individual pages like SignIn, SignUp, BracketPage, etc.
+  /services     # API calls and data fetching logic
+  /assets       # Static files like images and fonts
+  /screenshots  # Contains screenshots and demo videos of the site
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Screenshots & Videos
 
-### Code Splitting
+A folder called **`/screenshots`** has been added to the project root. It contains several images and videos demonstrating the user interface and the tournament system functionality of the Ranker application.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web WelcomePage
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
