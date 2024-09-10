@@ -7,7 +7,6 @@ Ranker is a web application that allows users to create lists, compare items, an
 - [Features](#features)
 - [Installation](#installation)
 - [Technologies](#technologies)
-- [Project Structure](#project-structure)
 - [Screenshots & Videos](#screenshots--videos)
 
 ## Features
@@ -54,17 +53,6 @@ Ranker is a web application that allows users to create lists, compare items, an
 - **Tachyons**: A functional CSS framework for styling.
 - **PostgreSQL**: Integration for data storage (via API).
 - **Node.js & Express**: Backend REST API for data fetching and updates.
-
-## Project Structure
-
-```
-/src
-  /components   # Reusable UI components
-  /pages        # Individual pages like SignIn, SignUp, BracketPage, etc.
-  /services     # API calls and data fetching logic
-  /assets       # Static files like images and fonts
-  /screenshots  # Contains screenshots and demo videos of the site
-```
 
 ## Screenshots & Videos
 
