@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import HomeButton from "../../components/Navigation/HomeButton";
-import '../CreatList/CreatList.css';
+import '../CreateList/CreateList.css';
 import Scroll from "../../components/Scroll";
 import AddItem from "../../components/AddButton/AddItem";
 import "./YourList.css";

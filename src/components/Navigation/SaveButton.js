@@ -3,7 +3,6 @@ import "./ButtonSize.css"
 
 
 const SaveButton = ({onClick}) => {
-
     return (
         <nav >
             <button onClick={onClick}

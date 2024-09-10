@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 const AddButton = () => {
     let navigate = useNavigate();
     const handleClick = () => {
-        navigate('/creatlist');
+        navigate('/createlist');
     }
 
     return (
@@ -18,7 +18,7 @@ const AddButton = () => {
             </div>
 
             <div>
-                <h2>Creat List</h2>
+                <h2>Create List</h2>
             </div>
         </div>
     );
